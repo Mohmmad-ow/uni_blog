@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import axios from 'axios'
+import { AuthContextProvider } from './context/authContext.jsx'
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 
 axios.defaults.baseURL = `http://localhost:3000`
@@ -16,7 +17,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <>Oops</>
   },
   {
     path: "/register",
@@ -25,11 +25,14 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
-  }
+  },
+  
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <AuthContextProvider>
     <RouterProvider router={router} />
+    </AuthContextProvider>
   </React.StrictMode>,
 )

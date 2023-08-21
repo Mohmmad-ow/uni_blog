@@ -7,10 +7,10 @@ export default function Login() {
 
     async function handleLogin() {
         try {
-            const response = await axios.post("/users/auth/login", credentials, {withCredentials: true});
-            console.log(response.data);
-            Cookies.set("access_token", response.data.token, {expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)})
-            localStorage.setItem("access_token", response.data.token)
+            const response = await axios.post("/users/auth/login",credentials);
+            console.log(response.data.token);
+
+            Cookies.set("access_token", response.data.token, {sameSite: "none", secure: true})
         } catch (error) {
             console.error("An error occurred:", error);
         }
