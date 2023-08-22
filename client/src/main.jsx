@@ -10,13 +10,16 @@ axios.defaults.baseURL = `http://localhost:3000`
 // Routes
 import Register from './User/Register.jsx'
 import Login from './User/Login.jsx'
+import Home from './pages/home.jsx'
+
 import './index.css'
+
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Home />,
   },
   {
     path: "/register",
