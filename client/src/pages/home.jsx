@@ -15,7 +15,7 @@ export default function Home() {
 
 
     return (
-        <div className="bg-gray-800">
+        <div className="bg-gray-700">
             <Navbar />
             {/* Hero section */}
             <main className="flex md:flex-row flex-col pt-8 ">
@@ -25,23 +25,23 @@ export default function Home() {
                     <div className="carousel w-[60%]  rounded-lg">
                         <div id='item1' className="mx-auto carousel-item w-full">
                             <div className="pt-16 flex flex-col justify-end items-start bg-red-400 px-8 text-blue-400 ">
-                                <p className="text-left text-sm pt-12"><small>{content[0].postedAt}</small></p>
-                                <h3 className="text-left text-xl py-4">{content[0].title} by <strong>{content[0].user}</strong></h3>
-                                <p className="text-left text-md py-4">{content[0].text.length > 144 ? content[0].text.substring(0, 144) : content[0].text}</p>
+                                <p className="text-left text-sm pt-12"><small>{content[1].postedAt}</small></p>
+                                <h3 className="text-left text-xl py-4">{content[1].title} by <strong>{content[1].user}</strong></h3>
+                                <p className="text-left text-md py-4">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
                             </div>
                         </div>
                         <div id='item2' className="mx-auto carousel-item w-full">
                             <div className="pt-16 flex flex-col justify-end items-start bg-green-400 px-8 text-blue-400 ">
                                 <p className="text-left text-sm pt-12"><small>{content[1].postedAt}</small></p>
                                 <h3 className="text-left text-xl py-4">{content[1].title} by <strong>{content[1].user}</strong></h3>
-                                <p className="text-left text-md py-4">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[0].text}</p>
+                                <p className="text-left text-md py-4">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
                             </div>
                         </div>
                         <div id='item3' className="mx-auto carousel-item w-full">
                             <div className="pt-16 flex flex-col justify-end items-start bg-purple-400 px-8 text-blue-400 ">
-                                <p className="text-left text-sm pt-12"><small>{content[0].postedAt}</small></p>
-                                <h3 className="text-left text-xl py-4">{content[0].title} by <strong>{content[0].user}</strong></h3>
-                                <p className="text-left text-md py-4">{content[0].text.length > 144 ? content[0].text.substring(0, 144) : content[0].text}</p>
+                                <p className="text-left text-sm pt-12"><small>{content[1].postedAt}</small></p>
+                                <h3 className="text-left text-xl py-4">{content[1].title} by <strong>{content[1].user}</strong></h3>
+                                <p className="text-left text-md py-4">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
                             </div>
                         </div>
                     </div>
@@ -61,19 +61,19 @@ export default function Home() {
                     <h1 className="text-center text-slate-50 pb-8 text-2xl ">Important announcements</h1>
                     <div className="flex flex-col  md:px-0 px-4 gap-12 pb-8 ">
                         <div className="pt-8 md:w-[90%]  mx-auto  flex flex-col justify-end items-start bg-red-400 px-4 text-blue-400 rounded-lg ">
-                            <p className="text-left text-xs pt-4"><small>{content[0].postedAt}</small></p>
-                            <h3 className="text-left text-lg py-2">{content[0].title} by <strong>{content[0].user}</strong></h3>
-                            <p className="text-left text-sm py-2">{content[0].text.length > 144 ? content[0].text.substring(0, 144) : content[0].text}</p>
+                            <p className="text-left text-xs pt-4"><small>{content[1].postedAt}</small></p>
+                            <h3 className="text-left text-lg py-2">{content[1].title} by <strong>{content[1].user}</strong></h3>
+                            <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
                         </div>
                         <div className="pt-8 md:w-[90%] mx-auto  flex flex-col justify-end items-start bg-green-400 px-4 text-blue-400 rounded-lg ">
                             <p className="text-left text-xs pt-4"><small>{content[1].postedAt}</small></p>
                             <h3 className="text-left text-lg py-2">{content[1].title} by <strong>{content[1].user}</strong></h3>
-                            <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[0].text}</p>
+                            <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
                         </div>
                         <div className="pt-8 md:w-[90%] mx-auto  flex flex-col justify-end items-start bg-purple-400 px-4 text-blue-400 rounded-lg ">
-                            <p className="text-left text-xs pt-4"><small>{content[0].postedAt}</small></p>
-                            <h3 className="text-left text-lg py-2">{content[0].title} by <strong>{content[0].user}</strong></h3>
-                            <p className="text-left text-sm py-2">{content[0].text.length > 144 ? content[0].text.substring(0, 144) : content[0].text}</p>
+                            <p className="text-left text-xs pt-4"><small>{content[1].postedAt}</small></p>
+                            <h3 className="text-left text-lg py-2">{content[1].title} by <strong>{content[1].user}</strong></h3>
+                            <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
                         </div>
                     </div>
                 </div>
@@ -86,24 +86,24 @@ export default function Home() {
                 <h1 className="text-3xl text-center text-white py-12">Top 4 Blogs of your Year!</h1>
                 <div className="grid md:grid-cols-4 grid-cols-2 px-12 gap-4">
                     <div className=" pt-8  mx-auto text-black flex flex-col justify-end items-start bg-green-400 px-4  rounded-lg ">
-                        <p className="text-left text-xs pt-4"><small>{content[0].postedAt}</small></p>
-                        <h3 className="text-left text-lg py-2">{content[0].title} by <strong>{content[0].user}</strong></h3>
-                        <p className="text-left text-sm py-2">{content[0].text.length > 144 ? content[0].text.substring(0, 144) : content[0].text}</p>
+                        <p className="text-left text-xs pt-4"><small>{content[1].postedAt}</small></p>
+                        <h3 className="text-left text-lg py-2">{content[1].title} by <strong>{content[1].user}</strong></h3>
+                        <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
                     </div>
                     <div className=" pt-8  mx-auto text-black  flex flex-col justify-end items-start bg-amber-400 px-4 rounded-lg ">
-                        <p className="text-left text-xs pt-4"><small>{content[0].postedAt}</small></p>
-                        <h3 className="text-left text-lg py-2">{content[0].title} by <strong>{content[0].user}</strong></h3>
-                        <p className="text-left text-sm py-2">{content[0].text.length > 144 ? content[0].text.substring(0, 144) : content[0].text}</p>
+                        <p className="text-left text-xs pt-4"><small>{content[1].postedAt}</small></p>
+                        <h3 className="text-left text-lg py-2">{content[1].title} by <strong>{content[1].user}</strong></h3>
+                        <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
                     </div>
                     <div className=" pt-8  mx-auto text-black  flex flex-col justify-end items-start bg-cyan-400 px-4  rounded-lg ">
-                        <p className="text-left text-xs pt-4"><small>{content[0].postedAt}</small></p>
-                        <h3 className="text-left text-lg py-2">{content[0].title} by <strong>{content[0].user}</strong></h3>
-                        <p className="text-left text-sm py-2">{content[0].text.length > 144 ? content[0].text.substring(0, 144) : content[0].text}</p>
+                        <p className="text-left text-xs pt-4"><small>{content[1].postedAt}</small></p>
+                        <h3 className="text-left text-lg py-2">{content[1].title} by <strong>{content[1].user}</strong></h3>
+                        <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
                     </div>
                     <div className=" pt-8  mx-auto text-black  flex flex-col justify-end items-start bg-red-400 px-4  rounded-lg ">
-                        <p className="text-left text-xs pt-4"><small>{content[0].postedAt}</small></p>
-                        <h3 className="text-left text-lg py-2">{content[0].title} by <strong>{content[0].user}</strong></h3>
-                        <p className="text-left text-sm py-2">{content[0].text.length > 144 ? content[0].text.substring(0, 144) : content[0].text}</p>
+                        <p className="text-left text-xs pt-4"><small>{content[1].postedAt}</small></p>
+                        <h3 className="text-left text-lg py-2">{content[1].title} by <strong>{content[1].user}</strong></h3>
+                        <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
                     </div>
                 </div>
 
@@ -112,24 +112,24 @@ export default function Home() {
                 <h1 className="text-3xl text-center text-white py-12">Top 4 Blogs of your Major!</h1>
                 <div className="grid md:grid-cols-4 grid-cols-2 px-12 gap-4">
                     <div className=" pt-8  mx-auto text-black  flex flex-col justify-end items-start bg-amber-400 px-4 rounded-lg ">
-                        <p className="text-left text-xs pt-4"><small>{content[0].postedAt}</small></p>
-                        <h3 className="text-left text-lg py-2">{content[0].title} by <strong>{content[0].user}</strong></h3>
-                        <p className="text-left text-sm py-2">{content[0].text.length > 144 ? content[0].text.substring(0, 144) : content[0].text}</p>
+                        <p className="text-left text-xs pt-4"><small>{content[1].postedAt}</small></p>
+                        <h3 className="text-left text-lg py-2">{content[1].title} by <strong>{content[1].user}</strong></h3>
+                        <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
                     </div>
                     <div className=" pt-8  mx-auto text-black  flex flex-col justify-end items-start bg-red-400 px-4  rounded-lg ">
-                        <p className="text-left text-xs pt-4"><small>{content[0].postedAt}</small></p>
-                        <h3 className="text-left text-lg py-2">{content[0].title} by <strong>{content[0].user}</strong></h3>
-                        <p className="text-left text-sm py-2">{content[0].text.length > 144 ? content[0].text.substring(0, 144) : content[0].text}</p>
+                        <p className="text-left text-xs pt-4"><small>{content[1].postedAt}</small></p>
+                        <h3 className="text-left text-lg py-2">{content[1].title} by <strong>{content[1].user}</strong></h3>
+                        <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
                     </div>
                     <div className=" pt-8  mx-auto text-black  flex flex-col justify-end items-start bg-cyan-400 px-4  rounded-lg ">
-                        <p className="text-left text-xs pt-4"><small>{content[0].postedAt}</small></p>
-                        <h3 className="text-left text-lg py-2">{content[0].title} by <strong>{content[0].user}</strong></h3>
-                        <p className="text-left text-sm py-2">{content[0].text.length > 144 ? content[0].text.substring(0, 144) : content[0].text}</p>
+                        <p className="text-left text-xs pt-4"><small>{content[1].postedAt}</small></p>
+                        <h3 className="text-left text-lg py-2">{content[1].title} by <strong>{content[1].user}</strong></h3>
+                        <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
                     </div>
                     <div className=" pt-8  mx-auto text-black flex flex-col justify-end items-start bg-green-400 px-4  rounded-lg ">
-                        <p className="text-left text-xs pt-4"><small>{content[0].postedAt}</small></p>
-                        <h3 className="text-left text-lg py-2">{content[0].title} by <strong>{content[0].user}</strong></h3>
-                        <p className="text-left text-sm py-2">{content[0].text.length > 144 ? content[0].text.substring(0, 144) : content[0].text}</p>
+                        <p className="text-left text-xs pt-4"><small>{content[1].postedAt}</small></p>
+                        <h3 className="text-left text-lg py-2">{content[1].title} by <strong>{content[1].user}</strong></h3>
+                        <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
                     </div>
                 </div>
             </div>
