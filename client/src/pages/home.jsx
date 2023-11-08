@@ -1,8 +1,7 @@
-import { useState } from "react";
-
 // Components
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import Download from "../context/viewPicture";
 let date = new Date().toLocaleDateString("en-US")
 const content = [
     {title: "How to get bitches", text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam error placeat ullam mollitia cupiditate repudiandae tempore. Deserunt perferendis, saepe perspiciatis hic labore doloremque, repellendus minus assumenda possimus repellat nemo sed dolores explicabo?",
@@ -134,6 +133,7 @@ export default function Home() {
                 </div>
             </div>
             <Footer />
+            <Download />
         </div>
     )
 }

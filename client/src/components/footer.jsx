@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import twitter from "../assets/square-twitter.svg";
 import linkedin from "../assets/linkedin.svg"
 import facebook from "../assets/facebook.svg"

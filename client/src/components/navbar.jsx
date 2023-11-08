@@ -1,11 +1,12 @@
 import { useFetchUser } from "../context/authContext";
 import { useState } from "react";
 import logo from "../assets/react.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import bars from "../assets/bars-solid.svg"
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const {user, dispatch, error, loading} = useFetchUser();
+  // eslint-disable-next-line no-unused-vars
+  const {user,loading, dispatch, error} = useFetchUser();
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -18,7 +19,7 @@ export default function Navbar() {
           <img src={logo} />
       </div>
       <button className={`text-slate-50 mx-auto md:hidden hover:outline outline-2 rounded-sm outline-offset-2 ${!isOpen ? "block" : "hidden"}`} onClick={toggleMenu}>
-          <FontAwesomeIcon icon={faBars} />
+          <img src={bars} className="'md:w-6 w-6" alt="" />
       </button>
       <div className="lg:pl-16 md:pl-8">
           <h1 className="text-slate-50">User: {username}</h1>
@@ -26,7 +27,7 @@ export default function Navbar() {
       <ul className={`py-6 ${isOpen ? "block" : "hidden"} md:flex `}>
           <li className="px-1 text-slate-50">
             <button className="text-slate-50 mx-auto md:hidden hover:outline outline-2 rounded-sm outline-offset-2" onClick={toggleMenu}>
-              <FontAwesomeIcon icon={faBars} />
+              <img src={bars} className="'md:w-6 w-6" alt="" />
             </button>
           </li>
           <li className="px-1 hover:text-gray-500 text-slate-50">

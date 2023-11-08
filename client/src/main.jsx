@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import axios from 'axios'
@@ -10,6 +11,8 @@ axios.defaults.baseURL = `http://localhost:3000`
 import Register from './auth/Register.jsx'
 import Login from './auth/Login.jsx'
 import Home from './pages/home.jsx'
+import CreateBlog from './pages/createBlog.jsx'
+
 
 import './index.css'
 
@@ -27,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
+  },
+  {
+    path: "/blog/create",
+    element: <CreateBlog />
   },
   
 ])

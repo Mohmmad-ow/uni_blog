@@ -10,6 +10,7 @@ const INITIAL_STATE = {
 
 const AuthContext = createContext(INITIAL_STATE)
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useFetchUser = () => {
     const {user, dispatch, error, loading} = useContext(AuthContext);
     return {user, dispatch, error, loading}
@@ -48,6 +49,7 @@ const authReducer = (state, action) => {
 
 
 
+// eslint-disable-next-line react/prop-types
 export const AuthContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(authReducer, INITIAL_STATE);
     const accessToken = Cookies.get("access_token") 
@@ -55,7 +57,7 @@ export const AuthContextProvider = ({children}) => {
         dispatch({type: 'loginStart'})
         const getUser = async () => {
             try {
-                const response = await axios.get("/users/auth/findClientUser", {withCredentials: true, headers: {
+                const response = await axios.get("/users/auth/findClientUser", {headers: {
                     "Authorization": `Bearer ${accessToken}`
                 }})
                 const {username, email, isAdmin} = response.data.user
@@ -66,7 +68,7 @@ export const AuthContextProvider = ({children}) => {
 
         }
         getUser()
-    }, [])
+    }, [accessToken])
     return (
         <AuthContext.Provider value={{dispatch: dispatch, user: state.user, error: state.error, loading: state.loading} }>
         {children}
