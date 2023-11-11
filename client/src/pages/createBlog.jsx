@@ -36,7 +36,7 @@ export default function createBlog() {
   } 
   
   const handleFileUpload = (e) => {
-    const file = selectedImage
+    const file = selectedImage.split(" ").join("_")
     console.log(title, editorRef.current.getContent())
     const imgRef = ref(storageRef, `images/${file.name}`);
     console.log(file)

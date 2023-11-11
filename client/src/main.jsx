@@ -11,7 +11,16 @@ axios.defaults.baseURL = `http://localhost:3000`
 import Register from './auth/Register.jsx'
 import Login from './auth/Login.jsx'
 import Home from './pages/home.jsx'
+
+
+// Blog Routes
 import CreateBlog from './pages/createBlog.jsx'
+import ViewBlogs from './pages/blog/viewBlogs.jsx'
+import Blog from './pages/blog/viewBlog.jsx'
+
+
+
+
 
 
 import './index.css'
@@ -35,6 +44,14 @@ const router = createBrowserRouter([
     path: "/blog/create",
     element: <CreateBlog />
   },
+  {
+    path: "/blogs/all",
+    element: <ViewBlogs />
+  },
+  {
+    path: "/blogs/:id",
+    element: <Blog />
+  }
   
 ])
 
