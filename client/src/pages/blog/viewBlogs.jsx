@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Download from "../../context/viewPicture";
+import Download from "../../utility/viewPicture";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Navbar from "../../components/navbar";

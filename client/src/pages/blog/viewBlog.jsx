@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import  dompurify from "dompurify";
 import formatRelativeDate  from "../../../Config/dateConfig.js"
 
-import Download from "../../context/viewPicture";
+import Download from "../../utility/viewPicture.jsx";
 import Navbar  from "../../components/navbar";
 import Footer from "../../components/footer";
 
