@@ -17,6 +17,8 @@ import Home from './pages/home.jsx'
 import CreateBlog from './pages/createBlog.jsx'
 import ViewBlogs from './pages/blog/viewBlogs.jsx'
 import Blog from './pages/blog/viewBlog.jsx'
+import UpdateBlog from './pages/blog/updateBlog.jsx'
+
 
 
 
@@ -51,6 +53,10 @@ const router = createBrowserRouter([
   {
     path: "/blogs/:id",
     element: <Blog />
+  },
+  {
+    path:  "/blogs/:id/update",
+    element: <UpdateBlog />
   }
   
 ])

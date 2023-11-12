@@ -17,7 +17,7 @@ export default function Login() {
             const response = await axios.post("/users/auth/login",credentials);
             console.log(response.data.token);
 
-            Cookies.set("access_token", response.data.token, {sameSite: "none", secure: true})
+            Cookies.set("access_token", response.data.token, {sameSite: "none", secure: true, expires: 1000 * 60 * 60 * 24})
         } catch (error) {
             console.error("An error occurred:", error);
         }

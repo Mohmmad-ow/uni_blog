@@ -19,16 +19,17 @@
     "@tinymce/tinymce-react": "^4.3.0",
     "axios": "^1.4.0",
     "cors": "^2.8.5",
+    "dompurify": "^3.0.6",
     "dotenv": "^16.3.1",
     "firebase": "^10.5.2",
     "js-cookie": "^3.0.5",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
-    "object-path": "^0.10.0",
+    "object-path": "^0.11.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.2",
-    "sort-by": "^1.2.0"
+    "sort-by": "^0.0.2"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.3",

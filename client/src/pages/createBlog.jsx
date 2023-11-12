@@ -25,26 +25,21 @@ export default function createBlog() {
     setTitle(e.target.value);
   }
 
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
   const handleImageUpload = (e) => {
     const image = e.target.files[0];
     setSelectedImage(image);
   } 
   
   const handleFileUpload = (e) => {
-    const file = selectedImage.split(" ").join("_")
+    const file = selectedImage;
     console.log(title, editorRef.current.getContent())
-    const imgRef = ref(storageRef, `images/${file.name}`);
+    const imgRef = ref(storageRef, `images/${file.name.split(" ").join("_")}`);
     console.log(file)
     uploadBytes(imgRef, file).then((snapshot) => {
       console.log('Uploaded a blob or file!');
       axios.post('/blogs/create', {
         name: title,
-        image: snapshot.metadata.fullPath,
+        imgUrl: snapshot.metadata.fullPath,
         blog: editorRef.current.getContent()
       },{headers: {
         "Authorization": `Bearer ${accessToken}`
@@ -61,7 +56,6 @@ export default function createBlog() {
 
       <div className='px-8 py-6'>
         <input type="file" onChange={handleImageUpload} className="file-input file-input-bordered file-input-success w-full max-w-xs" />
-        {/* <input type="button"onClick={handleFileUpload} className="btn btn-success" value="Upload" /> */}
       </div>
       <div className='px-8'>
       <Editor
