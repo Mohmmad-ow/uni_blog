@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import Download from "../../utility/viewPicture";
 import axios from "axios";
 import Cookies from "js-cookie";
+import DOMPurify from "dompurify";
+
+
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 
@@ -44,21 +47,27 @@ export default function ViewBlog() {
         <div>
         <Navbar/>
         <div className="grid grid-cols-3 gap-12 p-12">
-         {data.map((blog) => (
-            
+         {data.map((blog) => {
+          console.log(blog.blog)
+          blog.blog = DOMPurify.sanitize(blog.blog);
+          console.log(blog.blog)
+          blog.blog = blog.blog.length > 255 ? blog.blog.slice(0, 255) + "..." : blog.blog
+          console.log(blog.blog)
 
-                <div key={blog.id} className="card card-side bg-red-400 p-4 w-96  shadow-xl">
-                    <figure><Download imagePath={blog.imgUrl} /></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">{blog.name}</h2>
-                        <p>{blog.blog}</p>
-                        <div className="card-actions justify-end">
-                            <a href={`/blogs/${blog.id}`} className="btn btn-primary">View</a>
-                        </div>
-                    </div>
-                </div>
-            
-         ))}
+
+          return (
+              <div key={blog.id} className="card card-side bg-red-400 p-4 w-96  shadow-xl">
+                  <figure><Download imagePath={blog.imgUrl} /></figure>
+                  <div className="card-body">
+                      <h2 className="card-title">{blog.name}</h2>
+                      <div dangerouslySetInnerHTML={{__html: blog.blog}}></div>
+                      <div className="card-actions justify-end">
+                          <a href={`/blogs/${blog.id}`} className="btn btn-primary">View More</a>
+                      </div>
+                  </div>
+              </div>
+          )
+         })}
         </div>
         <Footer/>
         </div>

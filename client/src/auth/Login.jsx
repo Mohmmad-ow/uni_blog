@@ -10,7 +10,6 @@ import Navbar from "../components/navbar";
 
 export default function Login() {
     const [credentials, setCredentials] = useState(null)
-    const message = "No Info provided";
 
     async function handleLogin() {
         try {

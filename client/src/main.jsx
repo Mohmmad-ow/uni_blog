@@ -14,10 +14,11 @@ import Home from './pages/home.jsx'
 
 
 // Blog Routes
-import CreateBlog from './pages/createBlog.jsx'
+import CreateBlog from './pages/blog/createBlog.jsx'
 import ViewBlogs from './pages/blog/viewBlogs.jsx'
 import Blog from './pages/blog/viewBlog.jsx'
 import UpdateBlog from './pages/blog/updateBlog.jsx'
+import DeleteBlog from './pages/blog/deleteBlog.jsx'
 
 
 
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
   {
     path:  "/blogs/:id/update",
     element: <UpdateBlog />
+  },
+  {
+    path:  "/blogs/:id/delete",
+    element: <DeleteBlog />
   }
   
 ])

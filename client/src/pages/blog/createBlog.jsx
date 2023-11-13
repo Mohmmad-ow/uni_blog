@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-unused-vars */
-import storageRef from "../../firebase/firebaseStorage.js";
+import storageRef from "../../../firebase/firebaseStorage.js";
 import { uploadBytes, ref } from "firebase/storage";
 import axios from 'axios';
 
