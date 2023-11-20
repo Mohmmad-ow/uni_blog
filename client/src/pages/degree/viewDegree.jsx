@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import  dompurify from "dompurify";
 import formatRelativeDate  from "../../../Config/dateConfig.js"
 
-import Download from "../../utility/viewPicture.jsx";
-import Navbar  from "../../components/navbar";
-import Footer from "../../components/footer";
+import Navbar  from "../../components/navbar.jsx";
+import Footer from "../../components/footer.jsx";
 
 
-export default function ViewBlog() {
-    const [blog, setBlog] = useState({});
+export default function ViewDegree() {
+    const [degree, setDegree] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const id = window.location.pathname.split('/')[2];
@@ -25,20 +23,17 @@ export default function ViewBlog() {
         console.log("Gere")
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/blogs/blog/${id}`, {headers: {
+                const response = await axios.get(`/degrees/degree/${id}`, {headers: {
                     "Authorization": `Bearer ${accessToken}`
                 }});
                 
                 const data = await response.data;
-                data.blog = dompurify.sanitize(data.blog);
                 data.createdAt = formatRelativeDate(data.createdAt);
                 data.updatedAt = formatRelativeDate(data.updatedAt);
-                console.log(data.blog)
-                console.log("here", data)
-                setBlog(data);
+                console.log(data.name)
+                setDegree(data);
             } catch (error) {
                 setError(true);
-                setLoading(false);
             } finally {
                 setLoading(false);
             }
@@ -60,13 +55,11 @@ export default function ViewBlog() {
             <Navbar/>
             <div  className="py-12 px-16">
                         <div className="">
-                            <p><small>Created At: {blog.createdAt} | Updated At {blog.updatedAt} </small></p>
-                            <h1 className="text-center text-3xl pb-12">{blog.name}</h1>
-                            <figure className="flex justify-center items-center"><Download cssClass={"w-[75%] h-[75%]"} imagePath={blog.imgUrl} /></figure>
-                            <p className="pt-12" dangerouslySetInnerHTML={{__html: blog.blog}} ></p>
+                            <p><small>Created At: {degree.createdAt} | Updated At {degree.updatedAt} </small></p>
+                            <h1 className="text-center text-3xl pb-12">{degree.name}</h1>
                             <div className="flex gap-12 items-center justify-center pt-24"> 
-                                <div><a href={`/blogs/${id}/delete`} className="btn btn-wide btn-error">Delete</a></div>
-                                <div><a href={`/blogs/${id}/update`} className="btn btn-wide btn-info">Update</a></div>
+                                <div><a href={`/degree/${id}/delete`} className="btn btn-wide btn-error">Delete</a></div>
+                                <div><a href={`/degree/${id}/update`} className="btn btn-wide btn-info">Update</a></div>
                             </div>
                         </div>
                     </div>

@@ -56,13 +56,13 @@ export default function ViewBlog() {
 
 
           return (
-              <div key={blog.id} className="card card-side bg-red-400 p-4 w-96  shadow-xl">
-                  <figure><Download imagePath={blog.imgUrl} /></figure>
+              <div key={blog.id} className="card bg-red-400 p-4 w-96  shadow-xl">
+                  <figure><Download cssClasses={'max-h-32 w-full'} imagePath={blog.imgUrl} /></figure>
                   <div className="card-body">
                       <h2 className="card-title">{blog.name}</h2>
-                      <div dangerouslySetInnerHTML={{__html: blog.blog}}></div>
+                      <div className="card-body" dangerouslySetInnerHTML={{__html: blog.blog}}></div>
                       <div className="card-actions justify-end">
-                          <a href={`/blogs/${blog.id}`} className="btn btn-primary">View More</a>
+                          <a href={`/blogs/${blog.id}`} className="btn btn-sm btn-info">View More</a>
                       </div>
                   </div>
               </div>

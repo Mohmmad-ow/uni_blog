@@ -120,17 +120,18 @@ export default function ViewBlog() {
     }
 
     return (
-        <div className=''>
+        <div className='flex justify-center flex-col py-12'>
         <Navbar/>
-      <div className='px-8 pt-12 flex items-center gap-12'>
+       <div className='flex justify-center flex-col py-12 px-8'>
+      <div className='px-8 flex items-center gap-12'>
           <label htmlFor="title" className="text-slate-200">Blog Title</label>
-          <input onChange={handleTitleChange} value={blog.name} id='title' type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+          <input onChange={handleTitleChange} id='title' value={blog.name} type="text" placeholder="Type here" className="input input-bordered input-accent w-full max-w-xs" />
       </div>
 
-      <div className='px-8 py-6'>
-        <input type="file" onChange={handleImageUpload} className="file-input file-input-bordered file-input-success w-full max-w-xs" />
+      <div className='px-8 py-6 flex items-center gap-8'>
+        <label htmlFor="image" className="text-slate-200">Blog Image</label>
+        <input type="file" id="image" onChange={handleImageUpload} className="file-input file-input-bordered file-input-success w-full max-w-xs" />
       </div>
-      <div className='px-8'>
       <Editor
         apiKey='gx7vg9kfcsq72n1w1u6sj5fo67l5irgixisk6sai7h542hv8'
         onInit={(evt, editor) => editorRef.current = editor}
@@ -152,7 +153,9 @@ export default function ViewBlog() {
         }}
       />
       </div>
-      <button onClick={handleUpdatePost} className="btn btn-outline btn-secondary">Update</button>
+      <div className="mx-auto pb-12">
+      <button onClick={handleUpdatePost} className="btn btn-wide btn-outline btn-accent">Update</button>
+      </div>
       <Footer/>
     </div>
     )

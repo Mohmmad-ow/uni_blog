@@ -24,17 +24,17 @@ export default function Navbar() {
       <div className="lg:pl-16 md:pl-8">
           <h1 className="text-slate-50">User: {username}</h1>
       </div>
-      <ul className={`py-6 ${isOpen ? "block" : "hidden"} md:flex `}>
+      <ul className={`py-6 flex gap-4 ${isOpen ? "block" : "hidden"} md:flex `}>
           <li className="px-1 text-slate-50">
             <button className="text-slate-50 mx-auto md:hidden hover:outline outline-2 rounded-sm outline-offset-2" onClick={toggleMenu}>
               <img src={bars} className="'md:w-6 w-6" alt="" />
             </button>
           </li>
           <li className="px-1 hover:text-gray-500 text-slate-50">
-            <a href="#">Home</a>
+            <a href="/">Home</a>
           </li>
           <li className="px-1 hover:text-gray-500 text-slate-50">
-            <a href="#">Blog</a>
+            <a href="/blogs/all">Blogs</a>
           </li>
           <li className="px-1 hover:text-gray-500 text-slate-50">
             <a href="#">About</a>

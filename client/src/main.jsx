@@ -21,10 +21,12 @@ import UpdateBlog from './pages/blog/updateBlog.jsx'
 import DeleteBlog from './pages/blog/deleteBlog.jsx'
 
 
-
-
-
-
+// Degree Routes
+import CreateDegree from './pages/degree/createDegree.jsx'
+import ViewDegrees from './pages/degree/viewDegrees.jsx'
+import ViewDegree from './pages/degree/viewDegree.jsx'
+import DeleteDegree from './pages/degree/deleteDegree.jsx'
+import UpdateDegree from './pages/degree/updateDegree.jsx'
 
 import './index.css'
 
@@ -62,7 +64,27 @@ const router = createBrowserRouter([
   {
     path:  "/blogs/:id/delete",
     element: <DeleteBlog />
-  }
+  },
+  {
+    path: "/degrees/create",
+    element: <CreateDegree />
+  },
+  {
+    path: "/degrees/all",
+    element: <ViewDegrees />
+  },
+  {
+    path: "/degree/:id",
+    element: <ViewDegree />
+  },
+  {
+    path:  "/degree/:id/update",
+    element: <UpdateDegree />
+  },
+  {
+    path:  "/degree/:id/delete",
+    element: <DeleteDegree />
+  },
   
 ])
 

@@ -8,7 +8,7 @@ import { useState } from 'react';
 import React, { useRef } from 'react';
 
 
-export default function Download({imagePath}) {
+export default function Download({imagePath, cssClass}) {
     const [imageSrc, setImageSrc] = useState(null);
     const storage = storageRef;
     getDownloadURL(ref(storage, imagePath))
@@ -34,6 +34,6 @@ export default function Download({imagePath}) {
   });
 
   return (
-        <img className=" max-h-36" src={imageSrc} alt="" />
+        <img className={{cssClass}} src={imageSrc} alt="" />
   )
 }

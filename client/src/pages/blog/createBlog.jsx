@@ -12,6 +12,9 @@ import { Editor } from '@tinymce/tinymce-react';
 import Cookies from "js-cookie";
 
 
+import Navbar from "../../components/navbar.jsx";
+import Footer from "../../components/footer.jsx";
+
 export default function createBlog() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [selectedImage,  setSelectedImage] = useState(null);
@@ -48,14 +51,17 @@ export default function createBlog() {
   };
   
   return (
-    <div className=''>
-      <div className='px-8 pt-12 flex items-center gap-12'>
+    <>
+    <Navbar />
+    <div className='flex justify-center flex-col py-12'>
+      <div className='px-8 flex items-center gap-12'>
           <label htmlFor="title" className="text-slate-200">Blog Title</label>
-          <input onChange={handleTitleChange} id='title' type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+          <input onChange={handleTitleChange} id='title' type="text" placeholder="Type here" className="input input-bordered input-accent w-full max-w-xs" />
       </div>
 
-      <div className='px-8 py-6'>
-        <input type="file" onChange={handleImageUpload} className="file-input file-input-bordered file-input-success w-full max-w-xs" />
+      <div className='px-8 py-6 flex items-center gap-8'>
+        <label htmlFor="image" className="text-slate-200">Blog Image</label>
+        <input type="file" id="image" onChange={handleImageUpload} className="file-input file-input-bordered file-input-success w-full max-w-xs" />
       </div>
       <div className='px-8'>
       <Editor
@@ -79,7 +85,9 @@ export default function createBlog() {
         }}
       />
       </div>
-      <button onClick={handleFileUpload} className="btn btn-outline btn-secondary">Secondary</button>
+      <button onClick={handleFileUpload} className="btn btn-accent btn-wide mt-12 mx-auto btn-lg">Post</button>
     </div>
+    <Footer></Footer>
+    </>
   );
 }
