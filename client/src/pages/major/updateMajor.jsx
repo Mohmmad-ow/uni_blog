@@ -4,27 +4,27 @@ import Cookies from "js-cookie"
 import Navbar from "../../components/navbar"
 import Footer from "../../components/footer"
 
-export default function UpdateDegree() {
+export default function UpdateMajor() {
 
     const id = window.location.pathname.split("/")[2];
     
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [degree, setDegree] = useState(null);
+    const [major, setMajor] = useState(null);
     const accessToken = Cookies.get("access_token");
 
 
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get("/degrees/degree/"+id, {
+            const response = await axios.get("/majors/major/"+id, {
                headers: {
                    "Authorization": `Bearer ${accessToken}`
                }
                
            })
            console.log(response.data)
-           setDegree(response.data)
+           setMajor(response.data)
           } catch (error) {
             setError(true)
           } finally {
@@ -36,12 +36,12 @@ export default function UpdateDegree() {
     }, [])
 
     function handleNameUpdate(e) {
-       setDegree({...degree,name: e.target.value  })
-       console.log(degree)
+       setMajor({...major,name: e.target.value  })
+       console.log(major.name)
     }
-    const handleUpdateDegree = () => {
-        axios.put("/degrees/degree/update/"+id, {
-            degree: degree.name
+    const handleUpdateMajor = () => {
+        axios.put("/majors/major/update/"+id, {
+            major: major.name
         }, {
             headers: {
                 "Authorization": `Bearer ${accessToken}`
@@ -62,12 +62,12 @@ export default function UpdateDegree() {
     return (
         <div>
         <Navbar />
-            <div className="flex flex-col py-12 items-center justify-center gap-24">
-                <div className="w-[25%] flex flex-col items-center justify-center gap-8">
-                    <label htmlFor="degree">Degree</label>
-                    <input value={degree.name} className="input input-accent input-bordered w-full max-w-xs" type="text" id="degree" onChange={handleNameUpdate} />
+            <div>
+                <div>
+                    <label htmlFor="major">Major</label>
+                    <input value={major.name} className="input input-accent input-bordered w-full max-w-xs" type="text" id="major" onChange={handleNameUpdate} />
                 </div>
-                <button className="btn btn-wide btn-accent" onClick={handleUpdateDegree} type="submit">Update</button>
+                <button className="btn btn-accent" onClick={handleUpdateMajor} type="submit">Update</button>
             </div>
         <Footer />
         </div>

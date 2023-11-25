@@ -7,7 +7,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom"
 
 axios.defaults.baseURL = `http://localhost:3000`
 
-// Routes
+// Auth/Home Routes
 import Register from './auth/Register.jsx'
 import Login from './auth/Login.jsx'
 import Home from './pages/home.jsx'
@@ -27,6 +27,32 @@ import ViewDegrees from './pages/degree/viewDegrees.jsx'
 import ViewDegree from './pages/degree/viewDegree.jsx'
 import DeleteDegree from './pages/degree/deleteDegree.jsx'
 import UpdateDegree from './pages/degree/updateDegree.jsx'
+
+// Major Routes
+import CreateMajor from './pages/major/createMajor.jsx'
+import ViewMajors from './pages/major/viewMajors.jsx'
+import ViewMajor from './pages/major/viewMajor.jsx'
+import DeleteMajor from './pages/major/deleteMajor.jsx'
+import UpdateMajor from './pages/major/updateMajor.jsx'
+
+// Tag Routes
+import CreateTags from './pages/tags/createTag.jsx'
+import ViewTags from './pages/tags/viewTags.jsx'
+import ViewTag from './pages/tags/viewTag.jsx'
+import DeleteTag from './pages/tags/deleteTag.jsx'
+import UpdateTag from './pages/tags/updateTag.jsx'
+
+// Year Routes
+import CreateYears from './pages/year/createYear.jsx'
+import ViewYears from './pages/year/viewYears.jsx'
+import ViewYear from './pages/year/viewYear.jsx'
+import DeleteYear from './pages/year/deleteYear.jsx'
+import UpdateYear from './pages/year/updateYear.jsx'
+
+
+
+
+
 
 import './index.css'
 
@@ -84,6 +110,66 @@ const router = createBrowserRouter([
   {
     path:  "/degree/:id/delete",
     element: <DeleteDegree />
+  },
+  {
+    path: "/majors/create",
+    element: <CreateMajor />
+  },
+  {
+    path: "/majors/all",
+    element: <ViewMajors />
+  },
+  {
+    path: "/major/:id",
+    element: <ViewMajor />
+  },
+  {
+    path:  "/major/:id/update",
+    element: <UpdateMajor />
+  },
+  {
+    path:  "/major/:id/delete",
+    element: <DeleteMajor />
+  },
+  {
+    path: "/tags/create",
+    element: <CreateTags />
+  },
+  {
+    path: "/tags/all",
+    element: <ViewTags />
+  },
+  {
+    path: "/tag/:id",
+    element: <ViewTag />
+  },
+  {
+    path:  "/tag/:id/update",
+    element: <UpdateTag />
+  },
+  {
+    path:  "/tag/:id/delete",
+    element: <DeleteTag />
+  },
+  {
+    path: "/years/create",
+    element: <CreateYears />
+  },
+  {
+    path: "/years/all",
+    element: <ViewYears />
+  },
+  {
+    path: "/year/:id",
+    element: <ViewYear />
+  },
+  {
+    path:  "/year/:id/update",
+    element: <UpdateYear />
+  },
+  {
+    path:  "/year/:id/delete",
+    element: <DeleteYear />
   },
   
 ])

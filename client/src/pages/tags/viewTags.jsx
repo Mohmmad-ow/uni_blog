@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
-export default function ViewDegrees() {
+export default function ViewTags() {
 
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ export default function ViewDegrees() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get('/degrees/all', {headers: {
+            const response = await axios.get('/tags/all', {headers: {
                 "Authorization": `Bearer ${accessToken}`
             }})
             const result = await response.data;
@@ -39,11 +39,10 @@ export default function ViewDegrees() {
     return (
         <>
          <Navbar />
-            <div className="grid grid-cols-3 gap-6 px-6 py-12">
-                {data.map((degree) => (
-                    <div key={degree.id} className="card bg-red-500 p-4 w-96 flex flex-col gap-8 shadow-xl">
-                        <h1>{degree.name}</h1>
-                        <a href={`/degree/${degree.id}`} className="btn btn-sm btn-info">View More</a>
+            <div>
+                {data.map((tag) => (
+                    <div key={tag.id} className="card bg-red-400 p-4 w-96  shadow-xl">
+                        <h1>{tag.name}</h1>
                     </div>
                 ))}
             
