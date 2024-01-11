@@ -8,14 +8,13 @@ import { useState } from 'react';
 import React, { useRef } from 'react';
 
 
-export default function Download({imagePath, cssClass}) {
+export default function Download({imagePath, handleImgLoaded}) {
+
     const [imageSrc, setImageSrc] = useState(null);
     const storage = storageRef;
     getDownloadURL(ref(storage, imagePath))
     .then((url) => {
-    // `url` is the download URL for 'images/stars.jpg'
 
-    // This can be downloaded directly:
     const xhr = new XMLHttpRequest();
     xhr.responseType = 'blob';
     // eslint-disable-next-line no-unused-vars
@@ -34,6 +33,6 @@ export default function Download({imagePath, cssClass}) {
   });
 
   return (
-        <img className={{cssClass}} src={imageSrc} alt="" />
+        <img  src={imageSrc} alt="" />
   )
 }

@@ -10,7 +10,7 @@ import Footer from "../../components/footer";
 
 
 export default function ViewBlog() {
-    const [blog, setBlog] = useState({});
+    const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const id = window.location.pathname.split('/')[2];
@@ -22,20 +22,19 @@ export default function ViewBlog() {
     console.log(id);
 
     useEffect(() => {
-        console.log("Gere")
         const fetchData = async () => {
             try {
                 const response = await axios.get(`/blogs/blog/${id}`, {headers: {
                     "Authorization": `Bearer ${accessToken}`
                 }});
-                
                 const data = await response.data;
-                data.blog = dompurify.sanitize(data.blog);
+                console.log(data)
+                data.blog = dompurify.sanitize(data.blog,{
+                    ADD_TAGS: ['iframe'],
+                  });
                 data.createdAt = formatRelativeDate(data.createdAt);
                 data.updatedAt = formatRelativeDate(data.updatedAt);
-                console.log(data.blog)
-                console.log("here", data)
-                setBlog(data);
+                setData(data);
             } catch (error) {
                 setError(true);
                 setLoading(false);
@@ -49,7 +48,6 @@ export default function ViewBlog() {
 
     if (loading) {
         return <div>Loading...</div>;
-      
     } 
     if (error) { 
         return <div>Error</div>;
@@ -58,12 +56,22 @@ export default function ViewBlog() {
     return (
         <div className="bg-gray-700">
             <Navbar/>
-            <div  className="py-12 px-16">
-                        <div className="">
-                            <p><small>Created At: {blog.createdAt} | Updated At {blog.updatedAt} </small></p>
-                            <h1 className="text-center text-3xl pb-12">{blog.name}</h1>
-                            <figure className="flex justify-center items-center"><Download cssClass={"w-[75%] h-[75%]"} imagePath={blog.imgUrl} /></figure>
-                            <p className="pt-12" dangerouslySetInnerHTML={{__html: blog.blog}} ></p>
+            <div  className="py-12 ">
+                        <div className="px-16">
+                            <p><small>Created At: {data.createdAt} | Updated At {data.updatedAt} </small></p>
+                            <div className="flex justify-start items-center gap-12 pt-12">
+                                <div className="avatar">
+                                    <div className="w-24 rounded-full ">
+                                    <Download imagePath={data.Profile.profile_pic} />
+                                    </div>
+                                </div>
+                                <p className="text-center">Created By: <a className="link link-warning link-hover" href={`profiles/${data.Profile.id}`}><strong>{data.Profile.full_name}</strong></a></p>
+                            </div>
+                        </div>
+                            <div className="bg-black rounded-md mt-12 p-6">
+                            <h1 className="text-center text-2xl pb-12">{data.name}</h1>
+                            <div className="flex justify-center items-center mx-auto w-44 pt-12 ">{data.imgUrl ? <Download  imagePath={data.imgUrl} /> : null}</div>
+                            <p className="pt-12" dangerouslySetInnerHTML={{__html: data.blog}} ></p>
                             <div className="flex gap-12 items-center justify-center pt-24"> 
                                 <div><a href={`/blogs/${id}/delete`} className="btn btn-wide btn-error">Delete</a></div>
                                 <div><a href={`/blogs/${id}/update`} className="btn btn-wide btn-info">Update</a></div>

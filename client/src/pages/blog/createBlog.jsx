@@ -19,6 +19,7 @@ export default function createBlog() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [selectedImage,  setSelectedImage] = useState(null);
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const editorRef = useRef(null);
 
   const accessToken = Cookies.get("access_token") 
@@ -33,7 +34,15 @@ export default function createBlog() {
     setSelectedImage(image);
   } 
   
-  const handleFileUpload = (e) => {
+  const handlePostUpdate = () => {
+   if (selectedImage) {
+    handlePostUpdateWithPicture();
+   } else {
+    handlePostUpdateWithoutPicture();
+   }
+  };
+
+  const handlePostUpdateWithPicture = () => {
     const file = selectedImage;
     console.log(title, editorRef.current.getContent())
     const imgRef = ref(storageRef, `images/${file.name.split(" ").join("_")}`);
@@ -48,7 +57,19 @@ export default function createBlog() {
         "Authorization": `Bearer ${accessToken}`
     }});
     });
-  };
+  }
+  const handlePostUpdateWithoutPicture = () => {
+    
+      axios.post('/blogs/create', {
+        name: title,
+        blog: editorRef.current.getContent(),
+        description: description
+      },{headers: {
+        "Authorization": `Bearer ${accessToken}`
+    }});
+
+    };
+  
   
   return (
     <>
@@ -62,6 +83,10 @@ export default function createBlog() {
       <div className='px-8 py-6 flex items-center gap-8'>
         <label htmlFor="image" className="text-slate-200">Blog Image</label>
         <input type="file" id="image" onChange={handleImageUpload} className="file-input file-input-bordered file-input-success w-full max-w-xs" />
+      </div>
+      <div className='px-8 py-6 flex items-center gap-8'>
+        <label htmlFor="description" className="text-slate-200">Blog Description</label>
+        <textarea id="description" onChange={(e) => {setDescription(e.target.value)}} className="file-input file-input-bordered file-input-success w-full max-w-xs" />
       </div>
       <div className='px-8'>
       <Editor
@@ -85,9 +110,9 @@ export default function createBlog() {
         }}
       />
       </div>
-      <button onClick={handleFileUpload} className="btn btn-accent btn-wide mt-12 mx-auto btn-lg">Post</button>
+      <button onClick={handlePostUpdate} className="btn btn-accent btn-wide mt-12 mx-auto btn-lg">Post</button>
     </div>
-    <Footer></Footer>
+    <Footer />
     </>
   );
 }

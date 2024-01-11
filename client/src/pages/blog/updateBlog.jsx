@@ -24,11 +24,8 @@ export default function ViewBlog() {
 
 
     const accessToken = Cookies.get("access_token");
-    console.log(id);
-
 
     useEffect(() => {
-        console.log("Gere")
         const fetchData = async () => {
             try {
                 const response = await axios.get(`/blogs/blog/${id}`, {headers: {
@@ -37,8 +34,9 @@ export default function ViewBlog() {
                 
                 let {blog, name, imgUrl} = await response.data;
                 blog = dompurify.sanitize(blog);
-              
+                console.log(blog, name, imgUrl)
                 setBlog({blog, name, imgUrl});
+                console.log(blog)
             } catch (error) {
                 setError(true);
                 setLoading(false);
@@ -50,7 +48,7 @@ export default function ViewBlog() {
         fetchData();
     },[])
 
-    const deleteImg = ({imgPath}) => { 
+    const deleteImg = ({imgPath}) => {
         const imgRef = ref(storageRef, imgPath)
         
         deleteObject(imgRef).then(() => {
@@ -99,7 +97,8 @@ export default function ViewBlog() {
         } else {
             axios.put('/blogs/blog/update/' + id, {
                 name: blog.name,
-                blog: editorRef.current.getContent()
+                blog: editorRef.current.getContent(),
+                description: blog.description
               },{headers: {
                 "Authorization": `Bearer ${accessToken}`
             }});
@@ -131,6 +130,10 @@ export default function ViewBlog() {
       <div className='px-8 py-6 flex items-center gap-8'>
         <label htmlFor="image" className="text-slate-200">Blog Image</label>
         <input type="file" id="image" onChange={handleImageUpload} className="file-input file-input-bordered file-input-success w-full max-w-xs" />
+      </div>
+      <div className='px-8 py-6 flex items-center gap-8'>
+        <label htmlFor="description" className="text-slate-200">Blog Description</label>
+        <textarea value={blog.description}  id="description" onChange={(e) => {setBlog({...blog, description: e.target.value})}} className="file-input file-input-bordered file-input-success w-full max-w-xs" />
       </div>
       <Editor
         apiKey='gx7vg9kfcsq72n1w1u6sj5fo67l5irgixisk6sai7h542hv8'

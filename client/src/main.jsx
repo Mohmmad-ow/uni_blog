@@ -11,7 +11,9 @@ axios.defaults.baseURL = `http://localhost:3000`
 import Register from './auth/Register.jsx'
 import Login from './auth/Login.jsx'
 import Home from './pages/home.jsx'
-
+import CreateProfile from './auth/CreateProfile.jsx'
+import ViewProfile from './profile/viewProfile.jsx'
+import UpdateProfile from './profile/updateProfile.jsx'
 
 // Blog Routes
 import CreateBlog from './pages/blog/createBlog.jsx'
@@ -70,6 +72,22 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
+  },
+  {
+    path: "/profile/create",
+    element: <CreateProfile />
+  },
+  {
+    path: "/profile/",
+    element: <ViewProfile />
+  },
+  {
+    path: "/profile/update",
+    element: <UpdateProfile />
+  },
+  {
+    path: "/profile/:id",
+
   },
   {
     path: "/blog/create",

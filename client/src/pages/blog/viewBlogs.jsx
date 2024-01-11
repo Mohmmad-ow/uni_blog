@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Download from "../../utility/viewPicture";
+// import Download from "../../utility/viewPicture";
 import axios from "axios";
 import Cookies from "js-cookie";
 import DOMPurify from "dompurify";
@@ -7,7 +7,7 @@ import DOMPurify from "dompurify";
 
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
-
+import BlogDiv from "../../components/blogDiv";
 
 
 
@@ -48,24 +48,12 @@ export default function ViewBlog() {
         <Navbar/>
         <div className="grid grid-cols-3 gap-12 p-12">
          {data.map((blog) => {
-          console.log(blog.blog)
           blog.blog = DOMPurify.sanitize(blog.blog);
-          console.log(blog.blog)
           blog.blog = blog.blog.length > 255 ? blog.blog.slice(0, 255) + "..." : blog.blog
-          console.log(blog.blog)
 
 
           return (
-              <div key={blog.id} className="card bg-red-400 p-4 w-96  shadow-xl">
-                  <figure><Download cssClasses={'max-h-32 w-full'} imagePath={blog.imgUrl} /></figure>
-                  <div className="card-body">
-                      <h2 className="card-title">{blog.name}</h2>
-                      <div className="card-body" dangerouslySetInnerHTML={{__html: blog.blog}}></div>
-                      <div className="card-actions justify-end">
-                          <a href={`/blogs/${blog.id}`} className="btn btn-sm btn-info">View More</a>
-                      </div>
-                  </div>
-              </div>
+              <BlogDiv blog={blog} key={blog.id}/>
           )
          })}
         </div>

@@ -22,7 +22,7 @@ export default function Navbar() {
           <img src={bars} className="'md:w-6 w-6" alt="" />
       </button>
       <div className="lg:pl-16 md:pl-8">
-          <h1 className="text-slate-50">User: {username}</h1>
+          <h1 className="text-slate-50 text-xl">User: {username}</h1>
       </div>
       <ul className={`py-6 flex gap-4 ${isOpen ? "block" : "hidden"} md:flex `}>
           <li className="px-1 text-slate-50">
