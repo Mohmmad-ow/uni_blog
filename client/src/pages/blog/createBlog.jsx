@@ -52,7 +52,8 @@ export default function createBlog() {
       axios.post('/blogs/create', {
         name: title,
         imgUrl: snapshot.metadata.fullPath,
-        blog: editorRef.current.getContent()
+        blog: editorRef.current.getContent(),
+        description: description
       },{headers: {
         "Authorization": `Bearer ${accessToken}`
     }});

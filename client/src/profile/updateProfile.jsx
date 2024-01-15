@@ -11,15 +11,28 @@ import formatRelativeDate  from "../../Config/dateConfig.js";
 
 import Navbar from "../components/navbar.jsx";
 import Footer from "../components/footer.jsx";
+import OptionSelectBox from "./optionSelectBox.jsx";
 
 export default function UpdateProfile() {
+    // util
     const navigate = useNavigate()
-    const [data, setData] =  useState(null)
-    const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true)
-    const [img, setImg] = useState(null)
+    const [error, setError] = useState(false);
+    
+    // select options from api
     const [selectData, setSelectData] = useState(null)
+
+    // user prev options from api
     const [userData, setUserData] = useState(null)
+
+    // new img
+    const [img, setImg] = useState(null)
+
+    // new data
+    const [data, setData] =  useState(null)
+
+
+
     const accessToken = Cookies.get("access_token")
 
 
@@ -29,20 +42,22 @@ export default function UpdateProfile() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                // old profile options req
                 const response = await axios.get(`/profiles/profile/myprofile`, {headers: {
                     "Authorization": `Bearer ${accessToken}`
                 }});
                 
+                // profile options from api req 
                 const response2 = await axios.get('/utility/profile', {headers: {
                     "Authorization": `Bearer ${accessToken}`
                 }})
-                const result = await response2.data;
-                setSelectData(result)
+                // set options
+                setSelectData(response2.data)
+
+
                 const data = await response.data;
                 console.log(data)
-                setData(prevData =>( {...prevData, full_name: data.profile.full_name}));
-                data.createdAt = formatRelativeDate(data.createdAt);
-                data.updatedAt = formatRelativeDate(data.updatedAt);
+                setData({full_name: data.full_name});
                 setUserData(data);
             } catch (error) {
                 setError(true);
@@ -102,7 +117,7 @@ export default function UpdateProfile() {
         } else {
              handleAxiosPost()
         }
-        return navigate('/profile')
+        return await navigate('/profile')
     }
 
     function handleNameChange(e) {
@@ -140,7 +155,7 @@ export default function UpdateProfile() {
                     <div className="w-[50%] border-r-2 pr-6 border-gray-900">
                        
 
-                    <div className="flex flex-row gap-6 py-6 items-center justify-center">
+                    {/* <div className="flex flex-row gap-6 py-6 items-center justify-center">
                             <label className="text-slate-200" htmlFor="degree">Degree</label>
                             {error ? <p>Error: {error.message}</p> : 
                                     <select id="degree" defaultValue={"default"} className="select select-primary w-full max-w-xs">
@@ -150,29 +165,16 @@ export default function UpdateProfile() {
                                     )) : <option className="loading loading-spinner loading-md" ></option> }
                                     </select>
                             }
-                        </div>
-                        <div className="flex flex-row gap-6 py-6 items-center justify-center">
-                            <label className="text-slate-200" htmlFor="major">Major</label>
-                            {error ? <p>Error: {error.message}</p> : 
-                                    <select id="major" defaultValue={"default"} className="select select-primary w-full max-w-xs">
-                                    <option disabled value={"default"}>What is the major?</option>
-                                    {loading == false ? selectData.majors.map((major) => (
-                                        <option onClick={() => {setData({...data, majorId: major.id})}} key={major.id} value={major.id}>{major.name}</option>
-                                    )) : <option className="loading loading-spinner loading-md" ></option> }
-                                    </select>
-                            }
-                        </div>
-                        <div className="flex flex-row gap-6 py-6 items-center justify-center">
-                            <label className="text-slate-200" htmlFor="year">Year</label>
-                            {error ? <p>Error: {error.message}</p> : 
-                                    <select id="year" defaultValue={"default"} className="select select-primary w-full max-w-xs">
-                                    <option disabled value={"default"}>What is the Year?</option>
-                                    {loading == false ? selectData.years.map((year) => (
-                                        <option onClick={() => {setData({...data, yearId: year.id})}} key={year.id} value={year.id}>{year.name}</option>
-                                    )) : <option className="loading loading-spinner loading-md" ></option> }
-                                    </select>
-                            }
-                        </div>
+                        </div> */}
+                        {/* select Degree */}
+                        <OptionSelectBox handleSelectOption={(e) => {setData({...data, degreeId: e.target.value})}}
+                        name={"degree"} options={selectData.degrees} selectedOption={userData.Degree ? userData.Degree : null} loading={loading} />
+                        {/* select Major */}
+                        <OptionSelectBox handleSelectOption={(e) => {setData({...data, majorId: e.target.value})}}
+                        name={"major"} options={selectData.majors} selectedOption={ userData.Major ? userData.Major : null} loading={loading} />
+                        {/* select Year */}
+                        <OptionSelectBox handleSelectOption={(e) => {setData({...data, yearId: e.target.value})}}
+                        name={"year"} options={selectData.years} selectedOption={userData.Year ? userData.Year : null} loading={loading} />
                     </div>
                     <div>
                         <div className='px-8 py-6 flex items-center gap-8'>
@@ -182,8 +184,6 @@ export default function UpdateProfile() {
                     </div>
                 </div>
                 
-
-               
 
                 <button onClick={handleUpdateProfile} className="btn w-full btn-lg rounded-none mt-44" type="submit">Update Profile</button>
             </div>
