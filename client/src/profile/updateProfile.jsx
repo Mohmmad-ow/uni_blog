@@ -154,18 +154,6 @@ export default function UpdateProfile() {
                 <div className="flex flex-row">
                     <div className="w-[50%] border-r-2 pr-6 border-gray-900">
                        
-
-                    {/* <div className="flex flex-row gap-6 py-6 items-center justify-center">
-                            <label className="text-slate-200" htmlFor="degree">Degree</label>
-                            {error ? <p>Error: {error.message}</p> : 
-                                    <select id="degree" defaultValue={"default"} className="select select-primary w-full max-w-xs">
-                                    <option disabled value={"default"}>What is the Degree?</option>
-                                    {loading == false ? selectData.degrees.map((degree) => (
-                                        <option onClick={() => setData({...data, degreeId: degree.id})} key={degree.id} value={degree.id}>{degree.name}</option>
-                                    )) : <option className="loading loading-spinner loading-md" ></option> }
-                                    </select>
-                            }
-                        </div> */}
                         {/* select Degree */}
                         <OptionSelectBox handleSelectOption={(e) => {setData({...data, degreeId: e.target.value})}}
                         name={"degree"} options={selectData.degrees} selectedOption={userData.Degree ? userData.Degree : null} loading={loading} />

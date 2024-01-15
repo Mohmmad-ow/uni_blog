@@ -41,11 +41,18 @@ export default function CreateProfile() {
 
     
 
-    function handleCreateProfile() {
+    async function handleCreateProfile() {
+        if(img) {
+            await withImg()
+        } else {
+            await withoutImg()
+        }
+    }
+
+    async function withImg() {
         const imgRef = ref(storageRef, `profile_pics/${img.name.split(" ").join("_")}`);
-        uploadBytes(imgRef, img).then((snapshot) => {
-            console.log('Uploaded a blob or file!');
-            axios.post('/profiles/create', {
+        uploadBytes(imgRef, img).then(async (snapshot) => {
+           const response = await axios.post('/profiles/create', {
               full_name: data.full_name,
               profile_pic: snapshot.metadata.fullPath,
               DegreeId: data.degreeId,
@@ -54,9 +61,21 @@ export default function CreateProfile() {
             },{headers: {
               "Authorization": `Bearer ${accessToken}`
           }});
+            Cookies.set("access_token", response.data.token, {sameSite: "none", secure: true, expires: 1000 * 60 * 60 * 24})
           });
     }
-
+    async function withoutImg() {
+        const response = await axios.post('/profiles/create', {
+            full_name: data.full_name,
+            profile_pic: snapshot.metadata.fullPath,
+            DegreeId: data.degreeId,
+            MajorId: data.majorId, 
+            YearId: data.yearId
+          },{headers: {
+            "Authorization": `Bearer ${accessToken}`
+        }});
+        Cookies.set("access_token", response.data.token, {sameSite: "none", secure: true, expires: 1000 * 60 * 60 * 24})
+    }
     return (
         <div>
         <Navbar />
