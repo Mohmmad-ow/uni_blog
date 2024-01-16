@@ -13,6 +13,7 @@ export default function ViewBlog() {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [isOwner, setIsOwner] = useState(false);
     const id = window.location.pathname.split('/')[2];
 
 
@@ -27,15 +28,18 @@ export default function ViewBlog() {
                 const response = await axios.get(`/blogs/blog/${id}`, {headers: {
                     "Authorization": `Bearer ${accessToken}`
                 }});
-                const data = await response.data;
+                const data = await response.data.blog;
                 console.log(data)
+                
                 data.blog = dompurify.sanitize(data.blog,{
                     ADD_TAGS: ['iframe'],
                   });
                 data.createdAt = formatRelativeDate(data.createdAt);
                 data.updatedAt = formatRelativeDate(data.updatedAt);
+                setIsOwner(response.data.isSameUser)
                 setData(data);
             } catch (error) {
+                console.error(error)
                 setError(true);
                 setLoading(false);
             } finally {
@@ -72,10 +76,12 @@ export default function ViewBlog() {
                             <h1 className="text-center text-2xl pb-12">{data.name}</h1>
                             <div className="flex justify-center items-center mx-auto w-44 pt-12 ">{data.imgUrl ? <Download  imagePath={data.imgUrl} /> : null}</div>
                             <p className="pt-12" dangerouslySetInnerHTML={{__html: data.blog}} ></p>
+                            {isOwner&&
                             <div className="flex gap-12 items-center justify-center pt-24"> 
                                 <div><a href={`/blogs/${id}/delete`} className="btn btn-wide btn-error">Delete</a></div>
                                 <div><a href={`/blogs/${id}/update`} className="btn btn-wide btn-info">Update</a></div>
                             </div>
+                            }
                         </div>
                     </div>
             <Footer/>

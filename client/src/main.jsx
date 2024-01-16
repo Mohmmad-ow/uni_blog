@@ -87,7 +87,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/profile/:id",
-
+    element: <ViewProfile />
   },
   {
     path: "/blog/create",

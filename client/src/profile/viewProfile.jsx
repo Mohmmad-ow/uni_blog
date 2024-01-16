@@ -6,29 +6,35 @@ import formatRelativeDate from "../../Config/dateConfig.js";
 import Navbar from "../components/navbar.jsx";
 import Footer from "../components/footer.jsx";
 import Download from "../utility/viewPicture.jsx";
+import ViewBlogsComponent from "../pages/blog/viewBlogsComp.jsx";
 
 export default function ViewProfile() {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [isOwner, setIsOwner] = useState(false)
+
     const [isImageLoaded, setIsImageLoaded] = useState(false);
     
 
-
+    const id = window.location.pathname.split('/')[2];
+    console.log(id);
 
     const accessToken = Cookies.get("access_token");
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/profiles/profile/myprofile`, {headers: {
+                const response = await axios.get(`/profiles/profile/${id}`, {headers: {
                     "Authorization": `Bearer ${accessToken}`
                 }});
                 
-                const data = await response.data;
+                const data = await response.data.profile;
+                console.log(data)
                 data.createdAt = formatRelativeDate(data.createdAt);
                 data.updatedAt = formatRelativeDate(data.updatedAt);
-                console.log(data)
+                console.log(data);
+                setIsOwner(response.data.isOwner)
                 setData(data);
             } catch (error) {
                 console.error(error)
@@ -68,10 +74,17 @@ export default function ViewProfile() {
                                     <h3>Year: {data.Year ? data.Year.name: "not selected"}</h3>
                                 </div>
                             </div>
+                            {isOwner&&
                             <div className="flex gap-12 items-center justify-center pt-24"> 
                                 <div><a href={`/profile/delete`} className="btn btn-wide btn-error">Delete</a></div>
                                 <div><a href={`/profile/update`} className="btn btn-wide btn-info">Update</a></div>
                             </div>
+                            }
+                        </div>
+                        <div className="pt-12">
+                            <hr />
+                            <h4 className="text-2xl py-4 text-center ">Blogs by {data.full_name}</h4>
+                            <ViewBlogsComponent data={data.Blogs} />
                         </div>
                     </div>
             <Footer/>
