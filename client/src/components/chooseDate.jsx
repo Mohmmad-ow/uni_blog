@@ -1,29 +1,19 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
 
-export default function ChooseDates() {
-    const [date, setDate] = useState({type: null, date: null})
+export default function ChooseDates({handleOneDate, handleTwoDate}) {
     
-    function handleOneDate() { 
-        setDate({type: "one", date: [document.getElementById("oneDate").value]})
-    }
-
-    function handleTwoDate() {
-        const firstDate = document.getElementById("dateOne").value;
-        const secondDate = document.getElementById("dateTwo").value;
-
-        setDate({type: "two", date: [firstDate, secondDate]})
-
-    }
+    
+    
 
     return (
         <div className="bg-inherit">
             <button
                 className="btn bg-transparent"
-                onClick={() => document.getElementById("my_modal_2").showModal()}
+                onClick={() => document.getElementById("my_model_1").showModal()}
             >
                 Choose dates
             </button>
-            <dialog id="my_modal_2" className="modal">
+            <dialog id="my_model_1" className="modal">
                 <div className="modal-box">
                     <h3 className="text-center">Set Date</h3>
                         <details className="collapse mt-6 bg-base-200">
