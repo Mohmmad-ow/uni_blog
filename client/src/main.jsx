@@ -51,7 +51,8 @@ import ViewYear from './pages/year/viewYear.jsx'
 import DeleteYear from './pages/year/deleteYear.jsx'
 import UpdateYear from './pages/year/updateYear.jsx'
 
-
+// search bar testing
+import SearchForBlogs from './components/searchForBlogs.jsx'
 
 
 
@@ -189,6 +190,10 @@ const router = createBrowserRouter([
     path:  "/year/:id/delete",
     element: <DeleteYear />
   },
+  {
+    path: "/experiment",
+    element: <SearchForBlogs />
+  }
   
 ])
 

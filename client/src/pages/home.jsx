@@ -30,16 +30,14 @@ export default function Home() {
     useEffect(() => {
         const getContent = async () => {
             try {
-                const response = await axios.get("/blogs/blog/custom/homepage", {headers: {
-                    "Authorization": `Bearer ${accessToken}`
-                }});
-    
+                const response = await axios.get("/homepage");
+                console.log(response)
                 const data = response.data
                 const result = organizeByTags(data)
                 console.log(result)
                 setBlogs(result);
             } catch(err) {
-                console.log(err)
+                console.error(err)
                 setError(true);
             } finally {
                 setLoading(false);
@@ -120,7 +118,7 @@ export default function Home() {
                 </div>
                 {/* Important announcements */}
                 <div className="md:w-1/3 md:pr-12 flex flex-col items-center">
-                    <h1 className="text-center text-slate-50 pb-8 text-2xl ">Important announcements</h1>
+                    <h1 className="text-center text-slate-50 pb-8 text-2xl ">Announcements</h1>
                     <div className="flex flex-col  md:px-0 px-4 gap-12 pb-8 ">
                         {blogs['announcement'].map((blog) => 
                         
