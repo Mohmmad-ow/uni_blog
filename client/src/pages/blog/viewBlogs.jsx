@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 // import Download from "../../utility/viewPicture";
 import axios from "axios";
 import Cookies from "js-cookie";
-import DOMPurify from "dompurify";
 
 
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import BlogDiv from "../../components/blogDiv";
-
+import SearchForBlogs from "../../components/searchForBlogs";
 
 
 const accessToken = Cookies.get("access_token") 
@@ -46,16 +45,15 @@ export default function ViewBlog() {
       return (
         <div>
         <Navbar/>
-        <div className="grid grid-cols-3 gap-12 p-12">
-         {data.map((blog) => {
-          blog.blog = DOMPurify.sanitize(blog.blog);
-          blog.blog = blog.blog.length > 255 ? blog.blog.slice(0, 255) + "..." : blog.blog
+        <div className="flex justify-center">
+            <SearchForBlogs/>
+        </div>
+        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 p-12">
+         {data.map((blog) => (
 
-
-          return (
-              <BlogDiv blog={blog} key={blog.id}/>
-          )
-         })}
+           <BlogDiv blog={blog} key={blog.id}/>
+         )
+         )}
         </div>
         <Footer/>
         </div>

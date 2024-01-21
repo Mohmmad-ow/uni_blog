@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 // eslint-disable-next-line react/prop-types
-export default function ChooseTags({handleSelectTag}) {
+export default function ChooseTags({handleSelectTag, onOpen}) {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -49,7 +49,7 @@ export default function ChooseTags({handleSelectTag}) {
         <div className="bg-inherit">
             <button
                 className="btn bg-transparent"
-                onClick={() => document.getElementById("my_modal_2").showModal()}
+                onClick={() => {document.getElementById("my_modal_2").showModal(); onOpen()}}
             >
                 Choose Tags
             </button>

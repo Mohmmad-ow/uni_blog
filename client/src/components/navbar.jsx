@@ -1,49 +1,45 @@
 import { useFetchUser } from "../context/authContext";
-import { useState } from "react";
 import logo from "../assets/react.svg";
-import bars from "../assets/bars-solid.svg"
-
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+import Download from "../utility/viewPicture";
+export default function Navbar2() {
   // eslint-disable-next-line no-unused-vars
   const {user,loading, dispatch, error} = useFetchUser();
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  
 
-  const username = error ?  "not registered" : user != null ? user.username : "Loading..."
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
-    <nav className="w-full px-12 bg-hue-main flex items-center justify-between">
-      <div>
-          <img src={logo} />
-      </div>
-      <button className={`text-slate-50 mx-auto md:hidden hover:outline outline-2 rounded-sm outline-offset-2 ${!isOpen ? "block" : "hidden"}`} onClick={toggleMenu}>
-          <img src={bars} className="'md:w-6 w-6" alt="" />
-      </button>
-      <div className="lg:pl-16 md:pl-8">
-          <h1 className="text-slate-50 text-xl">User: {username}</h1>
-      </div>
-      <ul className={`py-6 flex gap-4 ${isOpen ? "block" : "hidden"} md:flex `}>
-          <li className="px-1 text-slate-50">
-            <button className="text-slate-50 mx-auto md:hidden hover:outline outline-2 rounded-sm outline-offset-2" onClick={toggleMenu}>
-              <img src={bars} className="'md:w-6 w-6" alt="" />
-            </button>
-          </li>
-          <li className="px-1 hover:text-gray-500 text-slate-50">
-            <a href="/">Home</a>
-          </li>
-          <li className="px-1 hover:text-gray-500 text-slate-50">
-            <a href="/blogs/all">Blogs</a>
-          </li>
-          <li className="px-1 hover:text-gray-500 text-slate-50">
-            <a href="#">About</a>
-          </li>
-          <li className="px-1 hover:text-gray-500 text-slate-50">
-            <a href="#">Contact me</a>
-          </li>
-      </ul>
-      
-    </nav>
+    <div className="navbar lg:px-24 bg-hue-main">
+        <div className=" navbar-start">
+            <a href="/" className="btn btn-ghost text-xl"><img src={logo} alt="Logo" /></a>
+        </div>
+        <div className="navbar-center">
+            <a href="/blogs/all" className="btn glass">Explore Blogs</a>
+        </div>
+        <div className="navbar-end gap-2">
+            <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                    <Download imagePath={user.profileImg}/>
+                </div>
+            </div>
+            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                <li>
+                <a href={`/profile/${user.profileId}`} className="justify-between">
+                    Profile
+                    <span className="badge">New</span>
+                </a>
+                </li>
+                <li><a href="/settings">Settings</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+            </ul>
+            </div>
+        </div>
+        </div>
   );
 }

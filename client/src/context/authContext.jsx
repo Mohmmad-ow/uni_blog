@@ -60,8 +60,11 @@ export const AuthContextProvider = ({children}) => {
                 const response = await axios.get("/users/auth/findClientUser", {headers: {
                     "Authorization": `Bearer ${accessToken}`
                 }})
-                const {username, email, isAdmin} = response.data.user
-                dispatch({type: 'loginSuccess', payload: {username, email, isAdmin}})
+                const {username, email, isAdmin, isManger} = response.data.user;
+                const profileId = response.data.user.Profile.id;
+                const profileImg = response.data.user.Profile.profile_pic;
+                console.log(response.data.user)
+                dispatch({type: 'loginSuccess', payload: {username, email, isAdmin, profileId,profileImg, isManger}})
             } catch (err) {
                 dispatch({type: 'loginFailure', payload: err})
             }

@@ -1,11 +1,9 @@
 // Components
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
 
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
-
 
 
 let date = new Date().toLocaleDateString("en-US")
@@ -24,7 +22,6 @@ export default function Home() {
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    const accessToken = Cookies.get("access_token")
 
 
     useEffect(() => {
@@ -83,6 +80,7 @@ export default function Home() {
     return (
         <div className="bg-gray-700">
             <Navbar />
+            
             {/* Hero section */}
             <main className="flex md:flex-row flex-col pt-8 ">
                 {/* Featured */}

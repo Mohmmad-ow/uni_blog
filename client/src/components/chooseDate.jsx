@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-export default function ChooseDates({handleOneDate, handleTwoDate}) {
+export default function ChooseDates({handleOneDate, handleTwoDate, onOpen}) {
     
     
     
@@ -9,7 +9,7 @@ export default function ChooseDates({handleOneDate, handleTwoDate}) {
         <div className="bg-inherit">
             <button
                 className="btn bg-transparent"
-                onClick={() => document.getElementById("my_model_1").showModal()}
+                onClick={() => {document.getElementById("my_model_1").showModal(); onOpen()}}
             >
                 Choose dates
             </button>

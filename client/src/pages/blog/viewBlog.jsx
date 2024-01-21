@@ -69,7 +69,7 @@ export default function ViewBlog() {
                                     <Download imagePath={data.Profile.profile_pic} />
                                     </div>
                                 </div>
-                                <p className="text-center">Created By: <a className="link link-warning link-hover" href={`profiles/${data.Profile.id}`}><strong>{data.Profile.full_name}</strong></a></p>
+                                <p className="text-center">Created By: <a className="link link-warning link-hover" href={`/profile/${data.Profile.id}`}><strong>{data.Profile.full_name}</strong></a></p>
                             </div>
                         </div>
                             <div className="bg-black rounded-md mt-12 p-6">
