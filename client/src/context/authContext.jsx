@@ -63,8 +63,9 @@ export const AuthContextProvider = ({children}) => {
                 const {username, email, isAdmin, isManger} = response.data.user;
                 const profileId = response.data.user.Profile.id;
                 const profileImg = response.data.user.Profile.profile_pic;
+                const fullName = response.data.user.Profile.full_name;
                 console.log(response.data.user)
-                dispatch({type: 'loginSuccess', payload: {username, email, isAdmin, profileId,profileImg, isManger}})
+                dispatch({type: 'loginSuccess', payload: {username, email, fullName,isAdmin, profileId,profileImg, isManger}})
             } catch (err) {
                 dispatch({type: 'loginFailure', payload: err})
             }
