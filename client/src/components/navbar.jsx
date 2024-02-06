@@ -27,7 +27,7 @@ export default function Navbar2() {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <Download imagePath={user.profileImg} />
+                {user.profileImg ? <Download imagePath={user.profileImg}  /> : null}
               </div>
             </div>
             <ul

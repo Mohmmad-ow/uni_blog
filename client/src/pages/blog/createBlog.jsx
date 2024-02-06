@@ -106,7 +106,7 @@ export default function createBlog() {
             'bold italic forecolor | image | code | link |  alignleft aligncenter ' +
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | table | help |',
-          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px;   }' 
+          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px;}' 
           
         }}
       />

@@ -4,6 +4,8 @@ import Cookies from "js-cookie";
 import dompurify from "dompurify";
 import formatRelativeDate from "../../../Config/dateConfig.js";
 
+import CreateLikeComp from "../likes/createLikes.jsx";
+
 import Download from "../../utility/viewPicture.jsx";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
@@ -29,16 +31,18 @@ export default function ViewBlog() {
             Authorization: `Bearer ${accessToken}`,
           },
         });
+        // response.data.blog.Like = response.data.blog.Like.length;
         const data = await response.data.blog;
-        console.log(data);
-
+        
         data.blog = dompurify.sanitize(data.blog, {
           ADD_TAGS: ["iframe"],
         });
+        
         data.createdAt = formatRelativeDate(data.createdAt);
         data.updatedAt = formatRelativeDate(data.updatedAt);
         setIsOwner(response.data.isSameUser);
         setData(data);
+        console.log(data);
       } catch (error) {
         console.error(error);
         setError(true);
@@ -78,21 +82,26 @@ export default function ViewBlog() {
               Created At: {data.createdAt} | Updated At {data.updatedAt}{" "}
             </small>
           </p>
-          <div className="flex justify-start items-center gap-12 pt-12">
-            <div className="avatar">
-              <div className="w-24 rounded-full ">
-                <Download imagePath={data.Profile.profile_pic} />
+          <div className="flex justify-between items-center py-12">
+            <div className="flex justify-center items-center gap-12">
+              <div className="avatar">
+                <div className="w-24 rounded-full ">
+                  <Download imagePath={data.Profile.profile_pic} />
+                </div>
               </div>
+              <p className="text-center">
+                Created By:{" "}
+                <a
+                  className="link link-warning link-hover"
+                  href={`/profile/${data.Profile.id}`}
+                >
+                  <strong>{data.Profile.full_name}</strong>
+                </a>
+              </p>
             </div>
-            <p className="text-center">
-              Created By:{" "}
-              <a
-                className="link link-warning link-hover"
-                href={`/profile/${data.Profile.id}`}
-              >
-                <strong>{data.Profile.full_name}</strong>
-              </a>
-            </p>
+            <div className="w-12 h-12">
+              <CreateLikeComp BlogId={data.id} key={data.id} />
+            </div>
           </div>
         </div>
         <div className="bg-black rounded-md mt-12 p-6">

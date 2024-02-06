@@ -67,7 +67,7 @@ export default function CreateProfile() {
     async function withoutImg() {
         const response = await axios.post('/profiles/create', {
             full_name: data.full_name,
-            profile_pic: snapshot.metadata.fullPath,
+            // profile_pic: snapshot.metadata.fullPath,
             DegreeId: data.degreeId,
             MajorId: data.majorId, 
             YearId: data.yearId
@@ -130,10 +130,6 @@ export default function CreateProfile() {
                         </div>
                     </div>
                 </div>
-                
-
-               
-
                 <button onClick={handleCreateProfile} className="btn w-full btn-lg rounded-none mt-44" type="submit">Create Profile</button>
             </div>
         <Footer />

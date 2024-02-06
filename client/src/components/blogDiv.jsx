@@ -7,7 +7,7 @@ export default function DivBlog(content) {
     if (blog.imgUrl === null) {
         return (
             <div className="flex flex-col justify-between bg-red-400 p-4 rounded-xl  shadow-xl">
-                        <h className="card-title float-left "><strong>Title:</strong> {blog.name}</h>
+                        <h1 className="card-title float-left "><strong>Title:</strong> {blog.name}</h1>
                         <div className=" float-left" ><strong>Description:</strong> {blog.description}</div>
                         <div className="card-actions float-left justify-start">
                             <a href={`/blogs/${blog.id}`} className="btn btn-sm btn-info">View More</a>

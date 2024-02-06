@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 // import { useFetchUser } from "../context/authContext"
 import storageRef from "../../firebase/firebaseStorage.js";
 import { uploadBytes, ref, deleteObject } from "firebase/storage";
-import formatRelativeDate  from "../../Config/dateConfig.js";
 
 import Navbar from "../components/navbar.jsx";
 import Footer from "../components/footer.jsx";
@@ -17,7 +16,7 @@ export default function UpdateProfile() {
     // util
     const navigate = useNavigate()
     const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(false);
+    // const [error, setError] = useState(false);
     
     // select options from api
     const [selectData, setSelectData] = useState(null)
@@ -43,7 +42,7 @@ export default function UpdateProfile() {
         const fetchData = async () => {
             try {
                 // old profile options req
-                const response = await axios.get(`/profiles/profile/myprofile`, {headers: {
+                const response = await axios.get(`/profiles/profile/v2/myprofile`, {headers: {
                     "Authorization": `Bearer ${accessToken}`
                 }});
                 
@@ -57,10 +56,10 @@ export default function UpdateProfile() {
 
                 const data = await response.data;
                 console.log(data)
-                setData({full_name: data.full_name});
+                setData({full_name: data.profile.full_name});
                 setUserData(data);
             } catch (error) {
-                setError(true);
+                // setError(true);
             } finally {
                 setLoading(false);
             }
@@ -108,7 +107,8 @@ export default function UpdateProfile() {
         if (img) {
             const imgPath = `profile_pics/${img.name.split(" ").join("_")}`
             const imgRef = ref(storageRef, imgPath);
-            await deleteImg()
+            userData.profile.profile_pic ? await deleteImg() : null;
+            // await deleteImg()
             await uploadBytes(imgRef, img).then((snapshot) => {
                 console.log('Uploaded a blob or file!');
                 handleAxiosPost(snapshot)
@@ -117,7 +117,7 @@ export default function UpdateProfile() {
         } else {
              handleAxiosPost()
         }
-        return await navigate('/profile')
+        return navigate('/profile')
     }
 
     function handleNameChange(e) {

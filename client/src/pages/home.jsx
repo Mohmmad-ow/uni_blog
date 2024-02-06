@@ -88,7 +88,7 @@ export default function Home() {
                     <h1 className="text-center text-2xl flex just pb-12 text-slate-50">Featured</h1>
                    <div className="lg:w-[70%] md:w-[80%] w-[90%] mx-auto">
                    <div className="carousel w-full rounded-lg">
-                            {blogs['Featured'].map((blog, ind) => {
+                            {blogs&&blogs['Featured'].map((blog, ind) => {
                                 
                                 return (
                                         <div key={blog.id} id={`item${ind+1}`} className="flex flex-col justify-end items-start bg-red-400 px-8 text-blue-400 mx-auto carousel-item w-full">
@@ -129,21 +129,7 @@ export default function Home() {
                         </div>
 
                         )}
-                        {/* <div className="pt-8 md:w-[90%]  mx-auto  flex flex-col justify-end items-start bg-red-400 px-4 text-blue-400 rounded-lg ">
-                            <p className="text-left text-xs pt-4"><small>{content[1].postedAt}</small></p>
-                            <h3 className="text-left text-lg py-2">{content[1].title} by <strong>{content[1].user}</strong></h3>
-                            <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
-                        </div>
-                        <div className="pt-8 md:w-[90%] mx-auto  flex flex-col justify-end items-start bg-green-400 px-4 text-blue-400 rounded-lg ">
-                            <p className="text-left text-xs pt-4"><small>{content[1].postedAt}</small></p>
-                            <h3 className="text-left text-lg py-2">{content[1].title} by <strong>{content[1].user}</strong></h3>
-                            <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
-                        </div>
-                        <div className="pt-8 md:w-[90%] mx-auto  flex flex-col justify-end items-start bg-purple-400 px-4 text-blue-400 rounded-lg ">
-                            <p className="text-left text-xs pt-4"><small>{content[1].postedAt}</small></p>
-                            <h3 className="text-left text-lg py-2">{content[1].title} by <strong>{content[1].user}</strong></h3>
-                            <p className="text-left text-sm py-2">{content[1].text.length > 144 ? content[1].text.substring(0, 144) : content[1].text}</p>
-                        </div> */}
+                        
                     </div>
                 </div>
             </main>

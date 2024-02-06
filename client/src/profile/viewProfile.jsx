@@ -3,6 +3,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import formatRelativeDate from "../../Config/dateConfig.js"; 
 
+
+
 import Navbar from "../components/navbar.jsx";
 import Footer from "../components/footer.jsx";
 import Download from "../utility/viewPicture.jsx";
@@ -30,12 +32,13 @@ export default function ViewProfile() {
                 }});
                 
                 const data = await response.data.profile;
-                console.log(data)
+                console.log("this is the data",response.data);
+                data.Blogs = response.data.Blogs
                 data.createdAt = formatRelativeDate(data.createdAt);
                 data.updatedAt = formatRelativeDate(data.updatedAt);
-                console.log(data);
                 setIsOwner(response.data.isOwner)
                 setData(data);
+
             } catch (error) {
                 console.error(error)
                 setError(true);
