@@ -54,7 +54,8 @@ import UpdateYear from './pages/year/updateYear.jsx'
 // search bar testing
 import SearchForBlogs from './components/searchForBlogs.jsx'
 
-
+// Settings
+import Settings from './utility/settings.jsx'
 
 
 import './index.css'
@@ -193,6 +194,10 @@ const router = createBrowserRouter([
   {
     path: "/experiment",
     element: <SearchForBlogs />
+  },
+  {
+    path: "/settings", 
+    element: <Settings />
   }
   
 ])

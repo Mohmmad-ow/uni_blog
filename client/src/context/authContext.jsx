@@ -52,7 +52,8 @@ const authReducer = (state, action) => {
 // eslint-disable-next-line react/prop-types
 export const AuthContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(authReducer, INITIAL_STATE);
-    const accessToken = Cookies.get("access_token") 
+    const accessToken = Cookies.get("access_token");
+
     useEffect(() => {
         dispatch({type: 'loginStart'})
         const getUser = async () => {
@@ -74,7 +75,7 @@ export const AuthContextProvider = ({children}) => {
         getUser()
     }, [accessToken])
     return (
-        <AuthContext.Provider value={{dispatch: dispatch, user: state.user, error: state.error, loading: state.loading} }>
+        <AuthContext.Provider value={ {dispatch: dispatch, user: state.user, error: state.error, loading: state.loading} }>
         {children}
         </AuthContext.Provider>
     )

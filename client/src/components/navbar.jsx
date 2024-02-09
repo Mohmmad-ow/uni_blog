@@ -1,7 +1,7 @@
 import { useFetchUser } from "../context/authContext";
 import logo from "../assets/react.svg";
 import Download from "../utility/viewPicture";
-export default function Navbar2() {
+export default function Navbar() {
   // eslint-disable-next-line no-unused-vars
   const { user, loading, dispatch, error } = useFetchUser();
 

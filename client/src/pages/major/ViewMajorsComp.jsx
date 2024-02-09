@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+
 export default function ViewMajorsComponent() {
 
     const [data, setData] = useState(null);
@@ -42,7 +43,6 @@ export default function ViewMajorsComponent() {
                         <a href={`/major/${major.id}`} className="btn btn-sm btn-info">View More</a>
                     </div>
                 ))}
-            
             </div>
     )
 }
