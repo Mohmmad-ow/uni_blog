@@ -9,6 +9,7 @@ export default function ViewTagsSettings() {
     const [error, setError] = useState(null);
     const [isEditing, setIsEditing] = useState(-1);
     const [update, setUpdate] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(-1);
 
 
     const accessToken = Cookies.get("access_token");
@@ -56,6 +57,16 @@ export default function ViewTagsSettings() {
         })
         setData(newData);
      }
+
+     const handleDeleteTag = async (tagId) => {
+        await axios.delete("/tags/tag/delete/" + tagId, {
+          headers: {
+            "Authorization": `Bearer ${accessToken}`
+          }
+        });
+        setUpdate(true);
+        setIsDeleting(-1); // Reset the deleting state after deletion
+      };
  
 
     if (loading) {
@@ -70,6 +81,16 @@ export default function ViewTagsSettings() {
       return (
         <div className="flex gap-4 mt-12 px-8 flex-col justify-center items-center">
             {data.map((tag) => {
+
+            if (isDeleting === tag.id) {
+                return (
+                <div key={tag.id} className="flex justify-center items-center gap-4">
+                    <p>Are you sure you want to delete this major?</p>
+                    <button className="btn btn-warning" onClick={() => handleDeleteTag(tag.id)}>Yes</button>
+                    <button className="btn btn-accent" onClick={() => setIsDeleting(-1)}>No</button>
+                </div>
+                );
+            } else {
                 return (
                     <div className={`flex justify-between ${isEditing === tag.id ? "gap-0" : "gap-12"} items-center bg-green-400 rounded-xl text-white py-2 px-4 w-full`} key={tag.id}>
                         {isEditing === tag.id ?
@@ -83,13 +104,17 @@ export default function ViewTagsSettings() {
                                 <button onClick={() => {setIsEditing(tag.id)}} className="btn btn-accent">Edit</button> 
                             }
                             { isEditing !== tag.id ?
-                                <button className="btn btn-warning">Delete</button>
+                                <button onClick={() => {setIsDeleting(tag.id)}} className="btn btn-warning">Delete</button>
                             :
                                 <button onClick={() => {setIsEditing(-1)}} className="btn btn-warning">Cancel</button>
                             }
                         </div>
                     </div>
                 )
+            }
+
+
+                
             })}
         </div>
       )

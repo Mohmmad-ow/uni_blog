@@ -40,7 +40,6 @@ export default function Navbar() {
                   className="justify-between"
                 >
                   Profile
-                  <span className="badge">New</span>
                 </a>
               </li>
               <li>

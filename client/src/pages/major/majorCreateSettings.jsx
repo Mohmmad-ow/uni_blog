@@ -34,7 +34,7 @@ export default function CreateMajorSettings({handleReload}) {
     
 
     return (
-        <div className="pt-4 px-6 flex items-center flex-row gap-6">
+        <div className="pt-4 px-3 flex items-center flex-row gap-6">
                 <div className="flex flex-row gap-6 items-center justify-center">
                     <label htmlFor="major">Major</label>
                     <input className="input input-accent input-bordered w-full max-w-xs" type="text" id="major" name="createMajor" onChange={(e) => setMajor(e.target.value)} />

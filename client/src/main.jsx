@@ -21,6 +21,7 @@ import ViewBlogs from './pages/blog/viewBlogs.jsx'
 import Blog from './pages/blog/viewBlog.jsx'
 import UpdateBlog from './pages/blog/updateBlog.jsx'
 import DeleteBlog from './pages/blog/deleteBlog.jsx'
+import AddTagsToBlogs from './pages/blog/addTagsToBlogs.jsx'
 
 
 // Degree Routes
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
   {
     path: "/blog/create",
     element: <CreateBlog />
+  },
+  {
+    path: "/blog/:id/add_tags",
+    element: <AddTagsToBlogs />
   },
   {
     path: "/blogs/all",
