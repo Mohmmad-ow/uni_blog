@@ -3,11 +3,13 @@
 import storageRef from "../../../firebase/firebaseStorage.js";
 import { uploadBytes, ref } from "firebase/storage";
 import axios from 'axios';
-
+import { useFetchUser } from "../../context/authContext.jsx";
 
 import { useState } from 'react';
 // eslint-disable-next-line no-unused-vars
 import React, { useRef } from 'react';
+import { useNavigate } from "react-router-dom";
+
 import { Editor } from '@tinymce/tinymce-react';
 import Cookies from "js-cookie";
 
@@ -15,14 +17,20 @@ import Cookies from "js-cookie";
 import Navbar from "../../components/navbar.jsx";
 import Footer from "../../components/footer.jsx";
 
-export default function createBlog() {
+export default function createBlog({isLoggedIn}) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [selectedImage,  setSelectedImage] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const editorRef = useRef(null);
+  const nav = useNavigate()
 
-  const accessToken = Cookies.get("access_token") 
+  const {error, loading} = useFetchUser();
+  
+
+  const accessToken = Cookies.get("access_token")
+
+
 
 
   function handleTitleChange(e) {
@@ -34,42 +42,71 @@ export default function createBlog() {
     setSelectedImage(image);
   } 
   
-  const handlePostUpdate = () => {
+  const handlePostUpdate = async () => {
    if (selectedImage) {
     handlePostUpdateWithPicture();
    } else {
     handlePostUpdateWithoutPicture();
    }
+   
   };
 
-  const handlePostUpdateWithPicture = () => {
+  const handlePostUpdateWithPicture = async () => {
     const file = selectedImage;
     console.log(title, editorRef.current.getContent())
     const imgRef = ref(storageRef, `images/${file.name.split(" ").join("_")}`);
     console.log(file)
-    uploadBytes(imgRef, file).then((snapshot) => {
-      console.log('Uploaded a blob or file!');
-      axios.post('/blogs/create', {
-        name: title,
-        imgUrl: snapshot.metadata.fullPath,
-        blog: editorRef.current.getContent(),
-        description: description
-      },{headers: {
-        "Authorization": `Bearer ${accessToken}`
-    }});
-    });
+    let id;
+    try {
+     await uploadBytes(imgRef, file).then(async (snapshot) => {
+        console.log('Uploaded a blob or file!');
+       const response = await axios.post('/blogs/create', {
+          name: title,
+          imgUrl: snapshot.metadata.fullPath,
+          blog: editorRef.current.getContent(),
+          description: description
+        },{headers: {
+          "Authorization": `Bearer ${accessToken}`
+      }});
+      id = response.data.id
+      });
+      
+    } catch(err) {
+      console.log(err);
+    } finally {
+      id ? nav("/blogs/" + id) : nav("/blogs/create")
+    }
   }
-  const handlePostUpdateWithoutPicture = () => {
-    
-      axios.post('/blogs/create', {
-        name: title,
-        blog: editorRef.current.getContent(),
-        description: description
-      },{headers: {
-        "Authorization": `Bearer ${accessToken}`
-    }});
+  const handlePostUpdateWithoutPicture = async () => {
+      let id;
+      try {
+        const response = await axios.post('/blogs/create', {
+          name: title,
+          blog: editorRef.current.getContent(),
+          description: description
+        },{headers: {
+          "Authorization": `Bearer ${accessToken}`
+      }});
+      id = response.data.id
+      } catch(err) {
+        console.log(err);
+        nav("/blogs/create");
+      } finally {
+        nav("/blogs/" + id);
+      }
+  
 
     };
+
+
+    if (loading) {
+      return <>Loading...</>
+    }
+
+    if (error) {
+      nav("/login");
+      return;
+    }
   
   
   return (
@@ -100,9 +137,9 @@ export default function createBlog() {
           plugins: [
             'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
             'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-            'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+            'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount',
           ],
-          toolbar: 'undo redo | blocks | ' +
+          toolbar: 'undo redo | blocks | media | ' +
             'bold italic forecolor | image | code | link |  alignleft aligncenter ' +
             'alignright alignjustify | bullist numlist outdent indent | ' +
             'removeformat | table | help |',

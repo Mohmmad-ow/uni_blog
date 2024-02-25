@@ -32,7 +32,7 @@ const authReducer = (state, action) => {
                 loading: false,
                 error: false
             }
-        case 'loginFailure': 
+        case 'loginFailure':
             return {
                 user: null,
                 loading: false,
@@ -62,13 +62,13 @@ export const AuthContextProvider = ({children}) => {
                     "Authorization": `Bearer ${accessToken}`
                 }})
                 const {username, email, isAdmin, isManger} = response.data.user;
-                const profileId = response.data.user.Profile.id;
-                const profileImg = response.data.user.Profile.profile_pic;
-                const fullName = response.data.user.Profile.full_name;
-                console.log(response.data.user)
+                const profileId = response.data.user.Profile ? response.data.user.Profile.id : null;
+                const profileImg = response.data.user.Profile ? response.data.user.Profile.profile_pic : null;
+                const fullName = response.data.user.Profile ? response.data.user.Profile.full_name : null;
                 dispatch({type: 'loginSuccess', payload: {username, email, fullName,isAdmin, profileId,profileImg, isManger}})
             } catch (err) {
-                dispatch({type: 'loginFailure', payload: err})
+                console.error(err)
+                dispatch({type: 'loginFailure', payload: {err: err.response.status, message: err.message}})
             }
 
         }

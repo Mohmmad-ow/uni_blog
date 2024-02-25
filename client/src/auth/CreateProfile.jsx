@@ -1,6 +1,7 @@
 import { useState,useEffect } from "react"
 import axios from "axios"
 import Cookies from "js-cookie"
+import { useNavigate } from "react-router-dom";
 
 // import { useFetchUser } from "../context/authContext"
 import storageRef from "../../firebase/firebaseStorage.js";
@@ -14,9 +15,11 @@ export default function CreateProfile() {
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true)
     const [img, setImg] = useState(null)
+    const nav = useNavigate();
     // const {user,userLoading, dispatch, UserError} = useFetchUser();
     const [selectData, setSelectData] = useState(null)
     const accessToken = Cookies.get("access_token")
+
 
 
 
@@ -47,6 +50,7 @@ export default function CreateProfile() {
         } else {
             await withoutImg()
         }
+        nav("/")
     }
 
     async function withImg() {
@@ -65,6 +69,7 @@ export default function CreateProfile() {
           });
     }
     async function withoutImg() {
+        console.log(data.degreeId, data.majorId, data.yearId)
         const response = await axios.post('/profiles/create', {
             full_name: data.full_name,
             // profile_pic: snapshot.metadata.fullPath,

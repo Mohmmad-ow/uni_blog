@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -32,8 +33,8 @@ export default function ViewProfile() {
                 }});
                 
                 const data = await response.data.profile;
-                console.log("this is the data",response.data);
-                data.Blogs = response.data.Blogs
+                console.log("this is the data",response.data.blogs);
+                data.blogs = response.data.blogs;
                 data.createdAt = formatRelativeDate(data.createdAt);
                 data.updatedAt = formatRelativeDate(data.updatedAt);
                 setIsOwner(response.data.isOwner)
@@ -41,7 +42,7 @@ export default function ViewProfile() {
 
             } catch (error) {
                 console.error(error)
-                setError(true);
+                setError(error);
             } finally {
                 setLoading(false);
             }
@@ -55,7 +56,13 @@ export default function ViewProfile() {
       
     } 
     if (error) { 
-        return <div>Error</div>;
+        return (
+            <div className="flex justify-center flex-col items-center">
+                <h5>You can't access the profile, incase these is an error contact your fellow admins to get it fixed</h5>
+                <p>{error.message}</p>
+                <p>Login <a className="btn btn-success" href="/login">Login</a>/<a className="btn btn-success" href="/register">Register</a></p>
+            </div>
+        );
     }
 
     return (
@@ -87,7 +94,7 @@ export default function ViewProfile() {
                         <div className="pt-12">
                             <hr />
                             <h4 className="text-2xl py-4 text-center ">Blogs by {data.full_name}</h4>
-                            <ViewBlogsComponent data={data.Blogs} />
+                            {data&&data.blogs.length > 0 ? <ViewBlogsComponent data={data.blogs} /> : <p>No blogs found</p> }
                         </div>
                     </div>
             <Footer/>

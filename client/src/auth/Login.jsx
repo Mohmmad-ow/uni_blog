@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios"
 import Cookies from "js-cookie";
-
+import { useNavigate } from "react-router-dom";
 
 // Components
 import Footer from "../components/footer";
@@ -9,14 +9,15 @@ import Navbar from "../components/navbar";
 
 
 export default function Login() {
-    const [credentials, setCredentials] = useState(null)
+    const [credentials, setCredentials] = useState(null);
+    const nav = useNavigate();
 
     async function handleLogin() {
         try {
             const response = await axios.post("/users/auth/login",credentials);
             console.log(response.data.token);
-
             Cookies.set("access_token", response.data.token, {sameSite: "none", secure: true, expires: 1000 * 60 * 60 * 24})
+            nav("/"); 
         } catch (error) {
             console.error("An error occurred:", error);
         }

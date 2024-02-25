@@ -45,8 +45,12 @@ export default function ViewBlog() {
       return (
         <div>
         <Navbar/>
-        <div className="flex justify-center">
+        <div className="flex items-center justify-center mt-8  gap-12">
             <SearchForBlogs/>
+            <div className="flex items-center gap-4 justify-center">
+              <h6>Want to create your own content?</h6>
+              <a href="/blogs/create" className="btn btn-success">Create a Blog</a>
+            </div>
         </div>
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 p-12">
          {data.map((blog) => (

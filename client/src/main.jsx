@@ -81,10 +81,6 @@ const router = createBrowserRouter([
     element: <CreateProfile />
   },
   {
-    path: "/profile/",
-    element: <ViewProfile />
-  },
-  {
     path: "/profile/update",
     element: <UpdateProfile />
   },
@@ -93,7 +89,7 @@ const router = createBrowserRouter([
     element: <ViewProfile />
   },
   {
-    path: "/blog/create",
+    path: "/blogs/create",
     element: <CreateBlog />
   },
   {

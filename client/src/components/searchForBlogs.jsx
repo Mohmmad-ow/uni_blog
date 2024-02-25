@@ -105,7 +105,7 @@ export default function SearchForBlogs() {
 
 
     return (
-       <div className="flex flex-col justify-center mt-12 items-start">
+       <div className="flex flex-col justify-center  items-start">
             <div className="my-auto flex gap-4">
                 <div className="dropdown">
                     <button tabIndex={0} role="button" className="btn btn-secondary">

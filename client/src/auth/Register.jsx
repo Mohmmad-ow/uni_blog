@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
@@ -6,11 +7,13 @@ import Footer from "../components/footer";
 export default function Register() {
     const [credentials, setCredentials] = useState(null)
     const message = "No Info provided";
+    const nav= useNavigate()
 
     async function handleRegister() {
         try {
             const response = await axios.post("http://localhost:3000/users/auth/create", credentials);
             console.log(response.data);
+            nav("/login")
          } catch (error) {
             console.error("An error occurred:", error);
          }

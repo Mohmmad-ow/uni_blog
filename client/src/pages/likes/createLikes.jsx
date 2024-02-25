@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import redHeart from "../../assets/heart-solid-red.svg"
 import grayHeart from "../../assets/heart-solid-gray.svg"
 
-export default function CreateLikeComp({BlogId}) {
+export default function CreateLikeComp({BlogId, handleAddLike}) {
     console.log("the Blog Id: " + BlogId)
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -22,8 +22,7 @@ export default function CreateLikeComp({BlogId}) {
                     headers: {
                         "Authorization": `Bearer ${accessToken}`
                     }
-                });
-    
+                }); 
                 setLike(response.data.liked ? true : false)
             } catch (err) {
                 setError(err)
@@ -46,12 +45,14 @@ export default function CreateLikeComp({BlogId}) {
                     "Authorization": `Bearer ${accessToken}`
                 },
             });
-            console.log(response.data.event)
+            console.log(response.data.event);
             setLike(response.data.liked ? false : true)
+            handleAddLike()
         } catch (err) {
             setError(err)
         } finally {
-            setLoading(false)
+            setLoading(false);
+
         }
 
 

@@ -3,7 +3,7 @@ import Download from "../../utility/viewPicture"
 
 // eslint-disable-next-line react/prop-types
 export default function ViewCommentsComponent({comments, className}) {
-    
+
     return (
         <div className={className}>
             {comments.map((comment) => {
@@ -24,6 +24,7 @@ export default function ViewCommentsComponent({comments, className}) {
                 )
             })
             }
+            
         </div>
     )
 }

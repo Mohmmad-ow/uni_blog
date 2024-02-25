@@ -1,4 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useFetchUser } from "../context/authContext";
+
+
 import axios from "axios";
 import Cookie from "js-cookie";
 
@@ -18,6 +23,9 @@ export default function Settings() {
     const [data, setData] = useState(null);
     const [updateTag, setUpdateTag] = useState(false);
     const [updateMajor, setUpdateMajor] = useState(false);
+    const nav = useNavigate();
+
+    const {loading, user, error} = useFetchUser()
 
 
     useEffect(() => {
@@ -42,9 +50,25 @@ export default function Settings() {
             setUpdateMajor(!updateMajor);
         }
     
+    if (loading || !data) {
+        return <>lLoading...retrieving user</>
+    }
 
-    if (!data) {
-        return (<>Loading...</>)
+    if (user&&!user.isAdmin) {
+       
+       
+       return (
+        <div>
+            <h5>You can't access the admin panel, incase these is an error contact your fellow admins to get it fixed</h5>
+            <p>Return Home <a className="btn btn-success" href="/">Yes</a></p>
+        </div>
+       )
+       
+    }
+
+    if (error) {
+        nav("/login")
+        return;
     }
 
     return (

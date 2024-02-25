@@ -1,18 +1,19 @@
+/* eslint-disable react/prop-types */
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import Navbar from "../../components/navbar";
-import Footer from "../../components/footer";
+// import Navbar from "../../components/navbar";
+// import Footer from "../../components/footer";
 
 
-export default function AddTagsToBlogs() {
+export default function AddTagsToBlogs({id}) {
   const [data, setData] = useState();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedToRemove, setSelectedToRemove] = useState([]);
   
-  const id = window.location.pathname.split("/")[2];
+//   const id = window.location.pathname.split("/")[2];
   const accessToken = Cookies.get("access_token");
 
   useEffect(() => {
@@ -77,7 +78,7 @@ export default function AddTagsToBlogs() {
       // Make API call to add/remove selected tags
       await axios.post(`/blogs/blog/${id}/add_tags`, {
         add: selectedTags,
-        remove: data.inBlog.map(tag => tag.id)
+        remove: selectedToRemove
       }, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -106,7 +107,6 @@ export default function AddTagsToBlogs() {
 
   return (
     <>
-      <Navbar />
       <div className="flex gap-4 justify-center py-4">
         <div className="rounded-xl py-4 px-6  bg-green-400">
           <h5 className="text-white">Tags to add</h5>
@@ -145,7 +145,6 @@ export default function AddTagsToBlogs() {
           Submit
         </button>
       </div>
-      <Footer />
     </>
   );
 }

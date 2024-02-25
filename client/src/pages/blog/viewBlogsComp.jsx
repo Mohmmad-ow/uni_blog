@@ -1,17 +1,12 @@
-import { useEffect, useState } from "react";
-// import Download from "../../utility/viewPicture";
-import axios from "axios";
-import Cookies from "js-cookie";
+/* eslint-disable react/prop-types */
 import DOMPurify from "dompurify";
 
 
-import Navbar from "../../components/navbar";
-import Footer from "../../components/footer";
+
 import BlogDiv from "../../components/blogDiv";
 
 
 
-const accessToken = Cookies.get("access_token") 
 
 export default function ViewBlogsComponent({data}) {
     

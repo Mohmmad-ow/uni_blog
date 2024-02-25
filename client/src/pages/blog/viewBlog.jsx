@@ -11,12 +11,15 @@ import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import CreateCommentComponent from "../comment/createCommentComp.jsx";
 import ViewCommentsComponent from "../comment/viewCommentsComponent.jsx";
+import AddTagsToBlogs from "./addTagsToBlogs.jsx";
+import PreviewTags from "../../components/previewTags.jsx";
 
 export default function ViewBlog() {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
+  const [viewTags, setViewTags] = useState(false); 
 
   const id = window.location.pathname.split("/")[2];
 
@@ -33,11 +36,11 @@ export default function ViewBlog() {
         });
         // response.data.blog.Like = response.data.blog.Like.length;
         const data = await response.data.blog;
-        
+
         data.blog = dompurify.sanitize(data.blog, {
           ADD_TAGS: ["iframe"],
         });
-        
+
         data.createdAt = formatRelativeDate(data.createdAt);
         data.updatedAt = formatRelativeDate(data.updatedAt);
         setIsOwner(response.data.isSameUser);
@@ -60,9 +63,21 @@ export default function ViewBlog() {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    if(response.status === 200) {
-      setData({...data, Comments: response.data})
+    if (response.status === 200) {
+      setData({ ...data, Comments: response.data });
     }
+  }
+
+  function handleAddLike() {
+    console.log(data.hasLiked, "im here")
+    if (data.hasLiked) {
+      setData({...data, likeCount: data.likeCount-1, hasLiked: false})
+      console.log("disliked")  
+      return;
+    }
+    setData({...data, likeCount: data.likeCount+1, hasLiked: true})
+    console.log("Liked")
+    return;
   }
 
   if (loading) {
@@ -99,10 +114,21 @@ export default function ViewBlog() {
                 </a>
               </p>
             </div>
-            <div className="w-12 h-12">
-              <CreateLikeComp BlogId={data.id} key={data.id} />
+            <div className="w-24 h-12 flex gap-4 justify-center items-center">
+              <CreateLikeComp handleAddLike={handleAddLike} BlogId={data.id} key={data.id} />
+              <p className="text-3xl">{data.likeCount}</p>  
             </div>
           </div>
+          <div>
+            <PreviewTags tags={data.Tags} />
+          </div>
+          {isOwner && (
+            <div>
+              <button className="btn btn-wide btn-info" onClick={() => {setViewTags(!viewTags)}} type="button">{viewTags ? 'Hide' : 'Set Blog Tags'}</button>
+              {viewTags &&
+              <AddTagsToBlogs id={id} />}
+          </div>
+          )}
         </div>
         <div className="bg-black rounded-md mt-12 p-6">
           <h1 className="text-center text-2xl pb-12">{data.name}</h1>
@@ -135,10 +161,18 @@ export default function ViewBlog() {
           )}
         </div>
         <div className="px-4 py-4">
-            <CreateCommentComponent onCreateComment={handleNewComment} blogId={data.id} />
-            <h6 className="mx-4">Comments</h6>
-            <hr  className="mb-4"/>
-            { data.Comments && data.Comments.length > 0 ? <ViewCommentsComponent className={"flex flex-col gap-4"} comments={data.Comments} />: null}
+          <CreateCommentComponent
+            onCreateComment={handleNewComment}
+            blogId={data.id}
+          />
+          <h6 className="mx-4">Comments</h6>
+          <hr className="mb-4" />
+          {data.Comments && data.Comments.length > 0 ? (
+            <ViewCommentsComponent
+              className={"flex flex-col gap-4"}
+              comments={data.Comments}
+            />
+          ) : null}
         </div>
       </div>
       <Footer />

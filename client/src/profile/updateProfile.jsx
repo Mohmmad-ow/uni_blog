@@ -53,11 +53,11 @@ export default function UpdateProfile() {
                 // set options
                 setSelectData(response2.data)
 
-
                 const data = await response.data;
                 console.log(data)
+                console.log(data)
                 setData({full_name: data.profile.full_name});
-                setUserData(data);
+                setUserData(data.profile);
             } catch (error) {
                 // setError(true);
             } finally {
@@ -117,7 +117,7 @@ export default function UpdateProfile() {
         } else {
              handleAxiosPost()
         }
-        return navigate('/profile')
+        return navigate('/profile/' + userData.id)
     }
 
     function handleNameChange(e) {
